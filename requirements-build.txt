@@ -1,0 +1,9 @@
+# Required only when rebuilding the GUI .exe from source.
+numpy>=1.24,<3
+Pillow>=10.0
+customtkinter>=5.2
+cryptography>=42
+nuitka>=4.3
+ziglang>=0.16
+rawpy>=0.27
+tifffile>=2025.1

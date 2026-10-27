@@ -1,0 +1,22 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+*.cube -text
+*.exe -text
+*.dll -text
+*.pyd -text
+*.ico -text
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.tif -text
+*.tiff -text
+*.mp4 -text
+*.mov -text
+*.zip -text

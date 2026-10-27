@@ -1,0 +1,49 @@
+DJI D-Log M Batch Grader
+Copyright (C) 2026 Hu080608. All rights reserved.
+
+PROPRIETARY COMMERCIAL SOFTWARE LICENSE / 商业软件许可
+
+This software is proprietary commercial software. It is not open-source.
+No permission is granted to use, copy, modify, merge, publish, distribute,
+sublicense, sell, resell, or create derivative works from this software
+except under a separate written commercial license or invoice issued by the
+copyright holder.
+
+1. LIMITED EVALUATION
+   The release may be downloaded from the official GitHub Releases page and
+   used for a machine-bound seven (7) day evaluation period that starts on
+   first launch. Evaluation does not grant production, commercial,
+   redistribution, or derivative-work rights. Continued use after the
+   evaluation period requires a paid license.
+
+2. PAID LICENSE
+   Commercial use requires a paid license from the copyright holder. The
+   issued invoice, order confirmation, or written license agreement defines
+   the permitted number of users, machines, deployments, support level and
+   term. Paid rights are limited to the scope expressly granted.
+
+3. RESTRICTIONS
+   Without a separate written agreement, you may not:
+   - redistribute, resell, sublicense, rent, lease or lend the software;
+   - publish the software or a modified build on another download site;
+   - remove copyright, license or attribution notices;
+   - use the software to provide a competing resale service;
+   - reverse engineer the software except where such restriction is
+     prohibited by applicable law.
+
+4. THIRD-PARTY COMPONENTS
+   FFmpeg, Python packages and DJI LUT files remain subject to their own
+   licenses and terms. See THIRD_PARTY_NOTICES.md and luts/SOURCES.md.
+   DJI and related marks belong to DJI. This project is not affiliated with
+   or endorsed by DJI.
+
+5. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING
+   FROM THE SOFTWARE OR ITS USE.
+
+6. CONTACT
+   Purchase, renewal and commercial licensing inquiries:
+   作者 QQ：3643791089
