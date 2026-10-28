@@ -1,4 +1,12 @@
-# DJI D-Log M Batch Grader v3.5.3
+# DJI D-Log M Batch Grader v3.6.0
+
+## 热门网络 LUT 分区
+
+- 新增 28 个“热门网络 LUT”，与 55 个 DJI 官方 LUT 分区隔离。
+- 按电影感、胶片风、日系清新、赛博朋克、复古暖调、自然风光、冷调夜景、实验风格二级分类。
+- 每个 LUT 都是 D-Log M 直用复合版本：DJI Air 3S D-Log M → Rec.709 基准 + MIT 源风格。
+- 每个文件包含来源、适用场景、使用注意和 MIT 许可说明。
+- 完整来源、适用场景、MIT 许可与重新生成脚本见 `luts/热门网络 LUT/` 和 `tools/build_network_luts.py`。
 
 ## 作者元数据统一
 
@@ -94,8 +102,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.5.3.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.5.3.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.6.0.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.6.0.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 

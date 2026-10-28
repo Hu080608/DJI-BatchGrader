@@ -1,14 +1,26 @@
 # DJI LUT Library / DJI LUT 库
 
-本目录已内置从 DJI 官方下载中心/CDN 下载的 **55 个 3D LUT 文件**，覆盖 **25 个设备/系列**。
+本目录已内置 **83 个 3D LUT 文件**：55 个 DJI 官方 LUT（覆盖 25 个设备/系列）和 28 个“热门网络 LUT”风格。
 
 ## 目录结构
 
 ```text
 luts/
 ├─ manifest.json                 # 自动生成：设备、类别、SHA-256、来源 URL
-├─ SOURCES.md                    # 官方来源链接清单
-├─ DOWNLOAD_REPORT.json          # 下载/校验结果
+├─ SOURCES.md                    # DJI 官方来源链接清单
+├─ DOWNLOAD_REPORT.json          # DJI 官方下载/校验结果
+├─ 热门网络 LUT/                 # 28 个 D-Log M 直用网络风格 LUT
+│  ├─ README.md                  # 分区说明与使用注意
+│  ├─ SOURCES.md                 # 风格来源、适用场景、MIT 许可清单
+│  ├─ THIRD_PARTY_LICENSES/      # 源 LUT 的 MIT 许可文本
+│  ├─ 电影感/
+│  ├─ 胶片风/
+│  ├─ 日系清新/
+│  ├─ 赛博朋克/
+│  ├─ 复古暖调/
+│  ├─ 自然风光/
+│  ├─ 冷调夜景/
+│  └─ 实验风格/
 ├─ DJI Air 3S/
 │  └─ Normalization/
 ├─ DJI Mavic 4 Pro/
@@ -49,6 +61,7 @@ luts/
 - DJI 下载中心目录：
   - https://www.dji.com/cn/downloads/softwares/mavic-4-pro-dlog-m-to-rec709-lut
 - 完整来源 URL 见 `SOURCES.md`
+- 热门网络 LUT 的来源、适用场景和 MIT 许可见 `热门网络 LUT/SOURCES.md`
 - 每个 LUT 的 SHA-256 见 `manifest.json`
 - 程序运行时会默认每 24 小时检查 DJI 官方目录；发现新机型/LUT 会自动下载、校验并补充到本目录。
 - 也可以在界面 LUT 区域点击“同步 LUT 库”立即检查。

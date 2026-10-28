@@ -139,7 +139,7 @@ class LutLibraryDialog(ctk.CTkToplevel):
         scrollbar.grid(row=0, column=1, sticky="ns", padx=(0, 6), pady=6)
         self.tree.configure(yscrollcommand=scrollbar.set)
         self.empty_label = ctk.CTkLabel(
-            table_frame, text="当前筛选下没有 LUT。" + chr(10) + "默认库包含 55 个 DJI 官方 LUT；自定义 LUT 请通过“导入 .cube”添加。", font=FONT_SMALL,
+            table_frame, text="当前筛选下没有 LUT。" + chr(10) + "默认库包含 83 个 LUT（55 个 DJI 官方 + 28 个热门网络风格）；自定义 LUT 请通过“导入 .cube”添加。", font=FONT_SMALL,
             text_color=MUTED, justify="center",
         )
         self.tree.bind("<<TreeviewSelect>>", self._on_selection)

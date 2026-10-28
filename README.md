@@ -1,7 +1,7 @@
 # DJI D-Log M Batch Grader
 
 **作者：Hu080608**  
-**版本：3.5.3**  
+**版本：3.6.0**  
 **平台：Windows 10/11 x64**  
 **许可：商业软件，买断授权**
 
@@ -22,7 +22,8 @@ DJI D-Log M Batch Grader 是一款面向 DJI 旗下设备拍摄素材的批量 L
 ## 核心优势
 
 - **照片和视频统一处理**：支持 JPG、PNG、TIFF、HEIC、常见相机 RAW（DNG/CR2/CR3/NEF/ARW 等）以及 MP4、MOV、M4V。
-- **内置 DJI 官方 LUT 库**：内置 55 个 DJI 官方 3D LUT，覆盖 25 个设备/系列，并支持按设备、类别筛选。
+- **内置 DJI 官方 LUT 库**：内置 55 个 DJI 官方 3D LUT，覆盖 25 个设备/系列。
+- **热门网络 LUT 分区**：新增 28 个 D-Log M 直用风格 LUT，按电影感、胶片风、日系清新、赛博朋克、复古暖调、自然风光、冷调夜景和实验风格分类。
 - **硬件性能优先**：自动探测 NVIDIA NVENC、Intel QSV、AMD AMF，真实试编码失败后自动回退 CPU；LUT 为 CPU 滤镜时默认软件解码以避免显存往返，编码仍优先使用硬件。
 - **批量任务可控**：视频/照片独立并发，支持“只处理视频 / 视频 + RAW / 全部处理”三种范围，任务队列持续显示待处理项，失败可单独重试，逐文件记录处理耗时。
 - **RAW 完整处理**：LibRaw 解码 → 相机白平衡 → sRGB → LUT → 16-bit TIFF 输出，保留 RAW 位深。
@@ -66,7 +67,7 @@ https://github.com/Hu080608/DJI-BatchGrader/releases
 下载最新的：
 
 ```text
-DJI_DLogM_BatchGrader_Windows_x64_v3.5.3.zip
+DJI_DLogM_BatchGrader_Windows_x64_v3.6.0.zip
 ```
 
 ### 2. 解压并启动
