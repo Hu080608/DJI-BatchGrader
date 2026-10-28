@@ -29,6 +29,8 @@ class AppConfig:
     video_crf: int = 16
     video_preset: str = "medium"
     video_lut_interp: str = "tetrahedral"  # trilinear / tetrahedral / nearest
+    lut_strength: float = 1.0            # 0.0 = original, 1.0 = full LUT
+    ui_mode: str = "simple"              # simple / pro
     hardware_bitrate: str = "100M"
     audio_bitrate: str = "256k"
     audio_policy: str = "copy_then_aac"
@@ -77,6 +79,10 @@ class AppConfig:
             problems.append("音频策略必须是 copy_then_aac 或 aac")
         if self.video_lut_interp not in {"trilinear", "tetrahedral", "nearest"}:
             problems.append("视频 LUT 插值必须是 trilinear / tetrahedral / nearest")
+        if not 0.0 <= float(self.lut_strength) <= 1.0:
+            problems.append("LUT 风格强度必须在 0..1 之间")
+        if self.ui_mode not in {"simple", "pro"}:
+            problems.append("界面模式必须是 simple 或 pro")
         if self.import_scope not in {"all", "video_raw", "video_only"}:
             problems.append("处理范围必须是 all / video_raw / video_only")
         if int(self.watch_interval_seconds) < 1:

@@ -71,6 +71,7 @@ def process_photo(
     output_path: Path,
     lut: CubeLUT,
     config: AppConfig,
+    lut_strength: float = 1.0,
     cancel_callback: Callable[[], bool] | None = None,
     log: Callable[[str], None] | None = None,
     progress_callback: Callable[[float], None] | None = None,
@@ -98,7 +99,7 @@ def process_photo(
             log(f"多帧图片仅处理第一帧：{input_path.name}（共 {n_frames} 帧）")
 
         graded = Image.new("RGB", (width, height))
-        pillow_lut = lut.pillow_filter()
+        pillow_lut = lut.blended(lut_strength).pillow_filter()
         total_chunks = max(1, (height + chunk_rows - 1) // chunk_rows)
         for index, y in enumerate(range(0, height, chunk_rows)):
             if cancel_callback and cancel_callback():
@@ -170,6 +171,7 @@ def process_raw_photo(
     output_path: Path,
     lut: CubeLUT,
     config: AppConfig,
+    lut_strength: float = 1.0,
     cancel_callback: Callable[[], bool] | None = None,
     log: Callable[[str], None] | None = None,
     progress_callback: Callable[[float], None] | None = None,
@@ -218,6 +220,7 @@ def process_raw_photo(
     height = int(rgb16.shape[0])
     width = int(rgb16.shape[1])
     graded16 = np.empty_like(rgb16)
+    effective_lut = lut.blended(lut_strength)
     total_chunks = max(1, (height + chunk_rows - 1) // chunk_rows)
     try:
         for index, y in enumerate(range(0, height, chunk_rows)):
@@ -225,7 +228,7 @@ def process_raw_photo(
                 raise PhotoCancelled("用户取消 RAW 图片处理")
             bottom = min(y + chunk_rows, height)
             chunk = rgb16[y:bottom].reshape((-1, 3)).astype(np.float32) / 65535.0
-            graded = lut.transform(chunk)
+            graded = effective_lut.transform(chunk)
             graded16[y:bottom] = np.rint(graded * 65535.0).astype(np.uint16).reshape(
                 (bottom - y, width, 3)
             )

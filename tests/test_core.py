@@ -8,6 +8,8 @@ import sys
 import unittest
 from pathlib import Path
 
+import numpy as np
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -24,6 +26,7 @@ from dlog_grader.lut_library import scan_lut_library  # noqa: E402
 from dlog_grader._license_guard import LicenseError, LicenseManager, canonical_payload  # noqa: E402
 from dlog_grader.lut_updater import parse_official_catalog  # noqa: E402
 from dlog_grader.processor import SCOPE_ALL, SCOPE_VIDEO_ONLY, SCOPE_VIDEO_RAW, is_ext_in_scope  # noqa: E402
+from dlog_grader.presets import TEMPLATES  # noqa: E402
 from dlog_grader.updater import check_for_update  # noqa: E402
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -58,6 +61,19 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(format_duration_hms(0), "00:00:00")
         self.assertEqual(format_duration_hms(5.4), "00:00:05")
         self.assertEqual(format_duration_hms(3661), "01:01:01")
+
+    def test_lut_strength_and_style_templates(self):
+        lut = CubeLUT.from_file(PROJECT_ROOT / "luts" / "DJI Air 3S" / "Normalization" / "DJI Air 3s DJI D-Log M to Rec.709.cube")
+        points = np.array([[0.2, 0.4, 0.6], [0.8, 0.1, 0.9]], dtype=np.float32)
+        identity = lut.blended(0.0).transform(points)
+        full = lut.blended(1.0).transform(points)
+        self.assertTrue(np.allclose(identity, points, atol=1e-5))
+        self.assertTrue(np.allclose(full, lut.transform(points), atol=1e-5))
+        self.assertGreaterEqual(len(TEMPLATES), 8)
+        for template in TEMPLATES:
+            self.assertTrue(template.path.exists(), f"模板 LUT 不存在：{template.path}")
+        cfg = AppConfig(lut_strength=0.65, ui_mode="simple")
+        self.assertEqual(cfg.validate(), [])
 
     def test_output_profiles(self):
         for key, profile in OUTPUT_PROFILES.items():

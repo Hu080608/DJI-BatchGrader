@@ -1,3 +1,3 @@
 """DJI D-Log M batch LUT grading application."""
 
-__version__ = "3.7.2"
+__version__ = "3.8.0"

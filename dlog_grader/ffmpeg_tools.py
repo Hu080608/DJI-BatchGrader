@@ -10,6 +10,7 @@ from typing import Callable
 
 from .encoders import EncoderChoice
 from .formats import OutputProfile
+from .lut import CubeLUT
 from .paths import PROJECT_ROOT, TEMP_DIR, TOOLS_DIR, child_environment
 
 
@@ -339,6 +340,7 @@ def transcode_video(
     source_audio_codecs: list[str] | None = None,
     input_height: int | None = None,
     lut_interp: str = "tetrahedral",
+    lut_strength: float = 1.0,
     progress_callback: Callable[[float], None] | None = None,
     cancel_callback: Callable[[], bool] | None = None,
     log_callback: Callable[[str], None] | None = None,
@@ -352,7 +354,14 @@ def transcode_video(
     job_temp_dir = job_temp_dir.resolve()
     job_temp_dir.mkdir(parents=True, exist_ok=True)
     work_lut = job_temp_dir / "active_lut.cube"
-    shutil.copyfile(lut_path, work_lut)
+    strength = min(1.0, max(0.0, float(lut_strength)))
+    if strength >= 0.9999:
+        shutil.copyfile(lut_path, work_lut)
+    else:
+        CubeLUT.from_file(lut_path).blended(strength).write_cube(
+            work_lut,
+            f"{Path(lut_path).stem} @ {strength * 100:.0f}%",
+        )
     try:
         rel_lut = work_lut.relative_to(PROJECT_ROOT).as_posix()
     except ValueError as exc:
@@ -368,8 +377,8 @@ def transcode_video(
     hardware_decode = False
     if log_callback:
         log_callback(
-            f"LUT 插值={lut_interp}；解码=软件（避免 CPU LUT 的显存往返），"
-            f"编码={encoder.name}"
+            f"LUT 插值={lut_interp}；强度={strength * 100:.0f}%；"
+            f"解码=软件（避免 CPU LUT 的显存往返），编码={encoder.name}"
         )
     plan = _attempt_plan(profile, encoder, audio_policy, source_audio_codecs, hardware_decode)
     last_error = ""

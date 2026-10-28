@@ -361,6 +361,7 @@ class BatchProcessor:
                         source_audio_codecs=info.get("audio_codecs", []),
                         input_height=info.get("height"),
                         lut_interp=getattr(self.config, "video_lut_interp", "tetrahedral"),
+                        lut_strength=getattr(self.config, "lut_strength", 1.0),
                         cancel_callback=self._cancelled,
                         progress_callback=lambda frac: self._set_job_progress(job, frac),
                         log_callback=lambda msg: self.log.info(f"{item.rel_path}: {msg}"),
@@ -377,6 +378,7 @@ class BatchProcessor:
                     output_path=item.output,
                     lut=self.lut,
                     config=self.config,
+                    lut_strength=getattr(self.config, "lut_strength", 1.0),
                     cancel_callback=self._cancelled,
                     log=lambda msg: self.log.info(msg),
                     progress_callback=lambda frac: self._set_job_progress(job, frac),
@@ -387,6 +389,7 @@ class BatchProcessor:
                     output_path=item.output,
                     lut=self.lut,
                     config=self.config,
+                    lut_strength=getattr(self.config, "lut_strength", 1.0),
                     cancel_callback=self._cancelled,
                     log=lambda msg: self.log.info(msg),
                     progress_callback=lambda frac: self._set_job_progress(job, frac),
@@ -423,6 +426,7 @@ class BatchProcessor:
         self.log.info(f"LUT：{self.lut.path.name}")
         self.log.info(f"LUT 实际路径：{self.lut.path}")
         self.log.info(f"LUT 尺寸：{self.lut.size}^3")
+        self.log.info(f"LUT 风格强度：{float(getattr(self.config, 'lut_strength', 1.0)) * 100:.0f}%")
         self.log.info(f"输出格式：{self.profile.label}")
         self.log.info(f"递归子目录：{'是' if self.config.recursive else '否'}")
         self.log.info(f"输出后缀：{self.config.output_suffix}")

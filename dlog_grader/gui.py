@@ -22,6 +22,7 @@ from .lut_dialog import LutLibraryDialog
 from .lut_library import scan_lut_library
 from .lut_updater import auto_lut_check_due, check_and_update_luts
 from .formats import OUTPUT_PROFILES, QUALITY_PRESETS, get_output_profile, profile_labels, quality_preset_labels
+from .presets import DEFAULT_TEMPLATE, TEMPLATES, StyleTemplate, recommend_template
 from .jobs import (
     JOB_STATUS_LABELS, JOB_STATUS_ORDER, JobRecord, QueueStore,
     format_duration_hms, now_iso,
@@ -178,6 +179,18 @@ class GraderGUI:
         self.scope_key_by_label = {label: key for key, label in self.scope_labels.items()}
         current_scope = normalize_scope(getattr(self.config, "import_scope", DEFAULT_SCOPE))
         self.scope_var = tk.StringVar(value=self.scope_labels[current_scope])
+        self.ui_mode_var = tk.StringVar(
+            value="简易模式" if getattr(self.config, "ui_mode", "simple") != "pro" else "专业模式"
+        )
+        self.lut_strength_var = tk.IntVar(
+            value=int(round(float(getattr(self.config, "lut_strength", 1.0)) * 100))
+        )
+        self.template_status_var = tk.StringVar(value="选择一个模板，或点击一键推荐。")
+        self.simple_mode = self.ui_mode_var.get() == "简易模式"
+        self._lut_history: list[tuple[str, int]] = []
+        self._lut_future: list[tuple[str, int]] = []
+        self._strength_before: tuple[str, int] | None = None
+        self._restoring_lut = False
         self.watch_var = tk.BooleanVar(value=bool(self.config.watch_enabled))
         self.telemetry_var = tk.BooleanVar(value=bool(self.config.telemetry_enabled))
         self.auto_update_var = tk.BooleanVar(value=bool(self.config.auto_check_updates))
@@ -213,6 +226,13 @@ class GraderGUI:
             font=FONT_BODY,
             text_color=MUTED,
         ).grid(row=1, column=0, sticky="w", pady=(2, 0))
+        self.mode_menu = ctk.CTkOptionMenu(
+            header, values=["简易模式", "专业模式"], variable=self.ui_mode_var,
+            width=106, height=30, corner_radius=9, fg_color="#1b2b46",
+            button_color="#284261", button_hover_color=ACCENT_DARK,
+            text_color=TEXT, font=FONT_SMALL, command=self._on_mode_change,
+        )
+        self.mode_menu.grid(row=0, column=1, rowspan=2, sticky="e", padx=(8, 0))
         ctk.CTkLabel(
             header,
             text=f"GUI EXE  v{__version__}",
@@ -222,26 +242,26 @@ class GraderGUI:
             corner_radius=12,
             padx=14,
             pady=6,
-        ).grid(row=0, column=1, rowspan=2, sticky="e")
+        ).grid(row=0, column=2, rowspan=2, sticky="e", padx=(8, 0))
         self.license_button = ctk.CTkButton(
             header, text="授权信息", width=118, height=30, corner_radius=9,
             fg_color="#12323a", hover_color="#1b2b46", text_color=ACCENT,
             border_width=1, border_color=BORDER, command=self._open_license_dialog,
             font=FONT_SMALL,
         )
-        self.license_button.grid(row=0, column=2, rowspan=2, sticky="e", padx=(8, 0))
+        self.license_button.grid(row=0, column=3, rowspan=2, sticky="e", padx=(8, 0))
         ctk.CTkButton(
             header, text="使用说明", width=88, height=30, corner_radius=9,
             fg_color="transparent", hover_color="#1b2b46", text_color=MUTED,
             border_width=1, border_color=BORDER, command=self._open_help,
             font=FONT_SMALL,
-        ).grid(row=0, column=3, rowspan=2, sticky="e", padx=(8, 0))
+        ).grid(row=0, column=4, rowspan=2, sticky="e", padx=(8, 0))
         ctk.CTkButton(
             header, text="检查更新", width=88, height=30, corner_radius=9,
             fg_color="transparent", hover_color="#1b2b46", text_color=MUTED,
             border_width=1, border_color=BORDER, command=self._check_updates,
             font=FONT_SMALL,
-        ).grid(row=0, column=4, rowspan=2, sticky="e", padx=(8, 0))
+        ).grid(row=0, column=5, rowspan=2, sticky="e", padx=(8, 0))
 
         main = ctk.CTkFrame(self.root, fg_color="transparent")
         main.grid(row=1, column=0, sticky="nsew", padx=20, pady=(0, 18))
@@ -273,10 +293,14 @@ class GraderGUI:
         self._build_source_card(scroll)
         self._build_output_card(scroll)
         self._build_lut_card(scroll)
+        self._build_quick_card(scroll)
         self._build_settings_card(scroll)
-        self._build_actions(scroll, row=4)
-        self._build_progress_card(scroll, row=5)
+        self._build_actions(scroll, row=5)
+        self._build_progress_card(scroll, row=6)
         self._build_log_panel(right)
+        self._apply_mode_visibility()
+        self.root.bind("<Control-z>", lambda _event: self._undo_lut())
+        self.root.bind("<Control-y>", lambda _event: self._redo_lut())
 
     def _build_source_card(self, parent) -> None:
         card = self._card(parent)
@@ -454,9 +478,205 @@ class GraderGUI:
         
                 font=FONT_SMALL,).pack(side="left", padx=7)
 
+        strength_row = ctk.CTkFrame(card, fg_color="transparent")
+        strength_row.grid(row=5, column=0, sticky="ew", padx=16, pady=(0, 8))
+        strength_row.grid_columnconfigure(1, weight=1)
+        ctk.CTkLabel(
+            strength_row, text="风格强度", font=FONT_SMALL_BOLD,
+            text_color=MUTED,
+        ).grid(row=0, column=0, sticky="w")
+        self.strength_slider = ctk.CTkSlider(
+            strength_row, from_=0, to=100, number_of_steps=100,
+            variable=self.lut_strength_var, command=self._on_strength_change,
+            height=16, progress_color=ACCENT_DARK, button_color=ACCENT,
+            button_hover_color="#5eead4", fg_color="#1b2b46",
+        )
+        self.strength_slider.grid(row=0, column=1, sticky="ew", padx=(10, 8))
+        self.strength_slider.bind("<ButtonRelease-1>", self._commit_strength)
+        self.strength_value_label = ctk.CTkLabel(
+            strength_row, text=f"{self.lut_strength_var.get()}%",
+            font=FONT_SMALL_BOLD, text_color=ACCENT, width=38,
+        )
+        self.strength_value_label.grid(row=0, column=2, sticky="e")
+
+    def _build_quick_card(self, parent) -> None:
+        card = self._card(parent)
+        self.quick_card = card
+        card.grid(row=3, column=0, sticky="ew", pady=(0, 9))
+        card.grid_columnconfigure(0, weight=1)
+        head = ctk.CTkFrame(card, fg_color="transparent")
+        head.grid(row=0, column=0, sticky="ew", padx=16, pady=(8, 2))
+        head.grid_columnconfigure(0, weight=1)
+        ctk.CTkLabel(
+            head, text="快速调色", font=FONT_SECTION, text_color=TEXT,
+        ).grid(row=0, column=0, sticky="w")
+        ctk.CTkButton(
+            head, text="一键推荐", width=88, height=28, corner_radius=8,
+            fg_color=ACCENT_DARK, hover_color="#0f766e", text_color=TEXT,
+            font=FONT_SMALL_BOLD, command=self._recommend_one_click,
+        ).grid(row=0, column=1, sticky="e")
+        ctk.CTkButton(
+            head, text="撤销", width=54, height=28, corner_radius=8,
+            fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
+            font=FONT_SMALL, command=self._undo_lut,
+        ).grid(row=0, column=2, sticky="e", padx=(6, 0))
+        ctk.CTkButton(
+            head, text="重做", width=54, height=28, corner_radius=8,
+            fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
+            font=FONT_SMALL, command=self._redo_lut,
+        ).grid(row=0, column=3, sticky="e", padx=(6, 0))
+        ctk.CTkLabel(
+            card, textvariable=self.template_status_var, font=FONT_SMALL,
+            text_color=MUTED, anchor="w", justify="left", wraplength=540,
+        ).grid(row=1, column=0, sticky="ew", padx=16, pady=(0, 6))
+
+        templates = ctk.CTkFrame(card, fg_color="transparent")
+        templates.grid(row=2, column=0, sticky="ew", padx=12, pady=(0, 9))
+        for index in range(4):
+            templates.grid_columnconfigure(index, weight=1)
+        for index, template in enumerate(TEMPLATES):
+            ctk.CTkButton(
+                templates, text=template.label, height=30, corner_radius=8,
+                fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
+                font=FONT_SMALL,
+                command=lambda item=template: self._apply_template(item),
+            ).grid(row=index // 4, column=index % 4, sticky="ew", padx=3, pady=3)
+
+    def _on_mode_change(self, label: str) -> None:
+        self.simple_mode = label == "简易模式"
+        self.config.ui_mode = "simple" if self.simple_mode else "pro"
+        try:
+            save_config(self.config)
+        except Exception:
+            pass
+        self._apply_mode_visibility()
+        self._append_log("INFO", f"界面模式：{label}")
+
+    def _apply_mode_visibility(self) -> None:
+        if not hasattr(self, "settings_card") or not hasattr(self, "quick_card"):
+            return
+        if self.simple_mode:
+            self.settings_card.grid_remove()
+            self.quick_card.grid()
+        else:
+            self.quick_card.grid_remove()
+            self.settings_card.grid()
+
+    def _current_lut_state(self) -> tuple[str, int]:
+        return self.lut_path_var.get(), int(self.lut_strength_var.get())
+
+    def _push_lut_history(self) -> None:
+        if self._restoring_lut:
+            return
+        current = self._current_lut_state()
+        if self._lut_history and self._lut_history[-1] == current:
+            return
+        self._lut_history.append(current)
+        self._lut_history = self._lut_history[-50:]
+        self._lut_future.clear()
+
+    def _restore_lut_state(self, state: tuple[str, int]) -> None:
+        path, strength = state
+        self._restoring_lut = True
+        try:
+            self.lut_path_var.set(path)
+            self.lut_strength_var.set(int(strength))
+            try:
+                self.strength_slider.set(int(strength))
+            except Exception:
+                pass
+            self.strength_value_label.configure(text=f"{int(strength)}%")
+            self.config.lut_strength = float(strength) / 100.0
+            self._refresh_lut_library()
+            self._refresh_lut_label()
+        finally:
+            self._restoring_lut = False
+
+    def _undo_lut(self) -> None:
+        if not self._lut_history:
+            self.status_var.set("没有可撤销的调色操作")
+            return
+        current = self._current_lut_state()
+        state = self._lut_history.pop()
+        self._lut_future.append(current)
+        self._restore_lut_state(state)
+        self.status_var.set("已撤销上一次调色操作")
+
+    def _redo_lut(self) -> None:
+        if not self._lut_future:
+            self.status_var.set("没有可重做的调色操作")
+            return
+        current = self._current_lut_state()
+        state = self._lut_future.pop()
+        self._lut_history.append(current)
+        self._restore_lut_state(state)
+        self.status_var.set("已重做调色操作")
+
+    def _on_strength_change(self, value) -> None:
+        amount = int(round(float(value)))
+        if not self._restoring_lut and self._strength_before is None:
+            self._strength_before = self._current_lut_state()
+        self.lut_strength_var.set(amount)
+        if hasattr(self, "strength_value_label"):
+            self.strength_value_label.configure(text=f"{amount}%")
+        self.config.lut_strength = amount / 100.0
+
+    def _commit_strength(self, _event=None) -> None:
+        if self._strength_before is None:
+            return
+        before = self._strength_before
+        self._strength_before = None
+        if before != self._current_lut_state():
+            self._lut_history.append(before)
+            self._lut_history = self._lut_history[-50:]
+            self._lut_future.clear()
+
+    def _apply_template(self, template: StyleTemplate) -> None:
+        if not template.path.exists():
+            messagebox.showerror(
+                "模板不可用",
+                "模板 LUT 不存在：" + chr(10) + str(template.path),
+            )
+            return
+        self._push_lut_history()
+        self.lut_path_var.set(str(template.path))
+        percent = int(round(template.strength * 100))
+        self.lut_strength_var.set(percent)
+        try:
+            self.strength_slider.set(percent)
+        except Exception:
+            pass
+        self.strength_value_label.configure(text=f"{percent}%")
+        self.config.lut_strength = float(template.strength)
+        self._refresh_lut_library()
+        self._refresh_lut_label()
+        self.template_status_var.set(f"已应用：{template.label} · {template.description}")
+        self._append_log("INFO", f"快速模板：{template.label}（强度 {percent}%）")
+        self.status_var.set(f"已应用模板：{template.label}")
+
+    def _recommend_one_click(self) -> None:
+        paths = list(self.selected_files)
+        if not paths and self.input_path:
+            if self.input_path.is_file():
+                paths = [self.input_path]
+            elif self.input_path.is_dir():
+                try:
+                    first = next((p for p in self.input_path.rglob("*") if p.is_file()), None)
+                    if first:
+                        paths = [first]
+                except OSError:
+                    pass
+        template, reason = recommend_template(paths)
+        self._apply_template(template)
+        messagebox.showinfo(
+            "一键推荐",
+            reason + chr(10) * 2 + f"已应用模板：{template.label}",
+        )
+
     def _build_settings_card(self, parent) -> None:
         card = self._card(parent)
-        card.grid(row=3, column=0, sticky="ew", pady=(0, 9))
+        self.settings_card = card
+        card.grid(row=4, column=0, sticky="ew", pady=(0, 9))
         card.grid_columnconfigure(0, weight=1)
         ctk.CTkLabel(
             card, text="处理设置", font=FONT_SECTION, text_color=TEXT,
@@ -839,8 +1059,8 @@ DJI D-Log M Batch Grader 使用说明
 一、最快开始（4 步）
 1. 把照片、视频或整个文件夹拖到左上拖拽区域。
 2. 选择输出文件夹（默认软件目录下 output/）。
-3. 在“3D LUT”区域点击“浏览官方LUT库”“浏览网络热门LUT库”或“浏览自定义LUT库”，选择设备与风格；默认 Air 3S。
-4. 选择输出格式，点击“开始批处理”。
+3. 简易模式可直接点击“快速调色”模板或“一键推荐”；专业模式可在“3D LUT”区域选择 LUT。
+4. 用“风格强度”调整效果强弱，再点击“开始批处理”。
 
 二、支持的输入
 照片：JPG/JPEG、PNG、TIF/TIFF、HEIC（可选依赖）。
@@ -859,7 +1079,11 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
 极致画质 / 高质量 / 标准 / 极速会自动映射 CRF、CPU preset 和 GPU 码率。
 手动拖动 CRF 会切换为“自定义”。
 
-五、LUT 库
+五、简易模式与专业模式
+右上角可切换模式。简易模式显示快速模板、一键推荐、风格强度和导出；专业模式保留 LUT、RAW、编码、并发和高级设置。
+所有模板和风格强度最终都通过同一套 LUT 引擎处理，不削弱专业能力。
+
+六、LUT 库
 默认 LUT 库内置 113 个 3D LUT：55 个 DJI 官方 LUT（25 个设备/系列）和 58 个“热门网络 LUT”风格。
 程序默认每 24 小时检查一次 DJI 官方目录，发现新机型/LUT 会自动下载补充；
 也可以点击“同步DJI官方LUT库”手动检查。
@@ -867,7 +1091,7 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
 来源统一分为“默认”和“自定义”；“热门网络 LUT”属于默认内置分区，只有用户导入的 LUT 归为“自定义”。
 也可以点击“导入 .cube”加载自己的 LUT。
 
-六、任务队列
+七、任务队列
 文件导入后会立即显示为“待处理”。
 状态流转：待处理 → 处理中 → 成功 / 失败。
 取消显示为“已取消”，输出已存在显示为“跳过”，导入无效显示“导入失败”。
@@ -877,30 +1101,30 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
 报告自动写入 reports/ 目录（JSON + CSV）。
 批次结束和日志会显示“本次处理总耗时：时:分:秒”。
 
-七、音频
+八、音频
 优先复制原始音频；目标容器不兼容时自动回退 AAC/PCM。
 多音轨、章节、元数据尽可能保留。
 
-八、监听文件夹
+九、监听文件夹
 开启“监听输入文件夹”后，新文件会自动入队；
 当前批次忙完会自动处理下一批。
 
-九、试用与授权
+十、试用与授权
 软件可免费从 GitHub Releases 下载，首次启动自动开始 7 天免费试用，无需授权。
 试用期间功能全部可用，输出不加水印；到期后停止新建任务，但不会删除已有文件。
 试用到期后可复制机器码，添加作者 QQ：3643791089 购买买断授权。
 右上角“授权信息”可复制机器码、导入授权或查看剩余时间。
 
-十、隐私与诊断
+十一、隐私与诊断
 素材全程本地处理，不上传。
 只有配置 telemetry_endpoint 并开启“匿名诊断”时才会上传匿名错误信息。
 
-十一、应用更新
+十二、应用更新
 应用更新只从 GitHub Releases 检查。
 确认更新后主界面会关闭，并打开独立更新进度页，持续显示下载、校验、解压、安装和启动新版本的状态。
 更新包通过 SHA-256 校验后才安装，并保留用户配置、自定义 LUT、授权、输出和日志。
 
-十二、取消与退出
+十三、取消与退出
 取消会终止当前 FFmpeg 并清理当前半成品。
 已完成文件会保留。
 """.strip()
@@ -1769,6 +1993,7 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
             self.lut_meta_var.set("LUT 文件不存在，请重新选择。")
 
     def _apply_lut_entry(self, entry) -> None:
+        self._push_lut_history()
         self.lut_path_var.set(str(entry.path))
         self._refresh_lut_library()
         self._refresh_lut_label()
@@ -1853,6 +2078,7 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
         except Exception as exc:
             messagebox.showerror("LUT 错误", f"无法读取 LUT：\n{source}\n{exc}")
             return
+        self._push_lut_history()
         self.lut_path_var.set(str(local_path))
         self._refresh_lut_library()
         self._refresh_lut_label()
@@ -1893,6 +2119,8 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
         cfg = AppConfig(**self.config.__dict__)
         cfg.recursive = bool(self.recursive_var.get())
         cfg.import_scope = self._current_scope()
+        cfg.lut_strength = self.lut_strength_var.get() / 100.0
+        cfg.ui_mode = "simple" if self.simple_mode else "pro"
         cfg.output_profile = self.profile_key_by_label.get(
             self.output_profile_var.get(), self.config.output_profile
         )

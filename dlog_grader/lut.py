@@ -256,6 +256,36 @@ class CubeLUT:
         table = data.reshape((size, size, size, 3))
         return cls(size, table, domain_min, domain_max, path)
 
+    def blended(self, strength: float) -> "CubeLUT":
+        """Return a non-destructive mix between identity and this LUT."""
+        amount = min(1.0, max(0.0, float(strength)))
+        if amount >= 0.9999:
+            return self
+        n = self.size
+        axes = [
+            np.linspace(float(self.domain_min[i]), float(self.domain_max[i]), n, dtype=np.float32)
+            for i in range(3)
+        ]
+        bb, gg, rr = np.meshgrid(axes[0], axes[1], axes[2], indexing="ij")
+        identity = np.stack((rr, gg, bb), axis=-1).astype(np.float32)
+        table = identity + (self.table - identity) * amount
+        return CubeLUT(n, table, self.domain_min, self.domain_max, self.path)
+
+    def write_cube(self, path: str | Path, title: str | None = None) -> None:
+        """Write this LUT as a standard .cube file."""
+        target = Path(path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        lines = [
+            f'TITLE "{title or self.path.stem}"',
+            f"LUT_3D_SIZE {self.size}",
+            "DOMAIN_MIN " + " ".join(f"{float(v):.6f}" for v in self.domain_min),
+            "DOMAIN_MAX " + " ".join(f"{float(v):.6f}" for v in self.domain_max),
+            "",
+        ]
+        for r, g, b in self.table.reshape((-1, 3)):
+            lines.append(f"{float(r):.6f} {float(g):.6f} {float(b):.6f}")
+        target.write_text(chr(10).join(lines) + chr(10), encoding="utf-8")
+
     def transform(self, rgb: np.ndarray) -> np.ndarray:
         """Apply the LUT to an (N, 3) float RGB array in 0..1 display units."""
         if rgb.size == 0:
