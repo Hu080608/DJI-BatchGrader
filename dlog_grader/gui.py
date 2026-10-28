@@ -185,7 +185,12 @@ class GraderGUI:
         self.lut_strength_var = tk.IntVar(
             value=int(round(float(getattr(self.config, "lut_strength", 1.0)) * 100))
         )
-        self.template_status_var = tk.StringVar(value="选择一个模板，或点击一键推荐。")
+        self.color_mode_var = tk.StringVar(
+            value="色彩还原" if self._is_official_lut_path(self.config.lut_path) else "调色"
+        )
+        self.template_status_var = tk.StringVar(
+            value="选择调色模板，或点击一键推荐；模板应用到本批次全部素材。"
+        )
         self.simple_mode = self.ui_mode_var.get() == "简易模式"
         self._lut_history: list[tuple[str, int]] = []
         self._lut_future: list[tuple[str, int]] = []
@@ -206,6 +211,64 @@ class GraderGUI:
             parent, fg_color=CARD, corner_radius=18,
             border_width=1, border_color=BORDER,
         )
+
+    @staticmethod
+    def _is_official_lut_path(path) -> bool:
+        try:
+            rel = Path(path).resolve().relative_to(LUT_DIR.resolve())
+        except ValueError:
+            return False
+        parts = rel.parts
+        return bool(parts) and parts[0] not in {"热门网络 LUT", "custom"}
+
+    def _set_strength(self, percent: int) -> None:
+        percent = max(0, min(100, int(percent)))
+        self.lut_strength_var.set(percent)
+        try:
+            self.strength_slider.set(percent)
+        except Exception:
+            pass
+        if hasattr(self, "strength_value_label"):
+            self.strength_value_label.configure(text=f"{percent}%")
+        self.config.lut_strength = percent / 100.0
+
+    def _on_color_mode_change(self, label: str) -> None:
+        self.color_mode_var.set(label)
+        current = project_path(self.lut_path_var.get())
+        if label == "色彩还原":
+            if not self._is_official_lut_path(current):
+                self._push_lut_history()
+                self.lut_path_var.set(str(TEMPLATES[-1].path))
+                self._set_strength(100)
+                self._refresh_lut_library()
+                self._refresh_lut_label()
+            else:
+                self._set_strength(100)
+        else:
+            if self._is_official_lut_path(current):
+                self._apply_template(DEFAULT_TEMPLATE)
+        self._apply_color_mode_visibility()
+
+    def _apply_color_mode_visibility(self) -> None:
+        if not hasattr(self, "browse_buttons"):
+            return
+        official = self.color_mode_var.get() == "色彩还原"
+        if hasattr(self, "quick_card"):
+            if official:
+                self.quick_card.grid_remove()
+            else:
+                self.quick_card.grid()
+        if hasattr(self, "strength_row"):
+            if official:
+                self.strength_row.grid_remove()
+            else:
+                self.strength_row.grid()
+        for mode, button in self.browse_buttons.items():
+            button.configure(state="normal" if (mode == "official") == official else "disabled")
+        if hasattr(self, "import_lut_button"):
+            self.import_lut_button.configure(state="disabled" if official else "normal")
+        if hasattr(self, "sync_lut_button"):
+            self.sync_lut_button.configure(state="normal" if official else "disabled")
 
     def _build_ui(self) -> None:
         self.root.grid_columnconfigure(0, weight=1)
@@ -293,10 +356,9 @@ class GraderGUI:
         self._build_source_card(scroll)
         self._build_output_card(scroll)
         self._build_lut_card(scroll)
-        self._build_quick_card(scroll)
         self._build_settings_card(scroll)
-        self._build_actions(scroll, row=5)
-        self._build_progress_card(scroll, row=6)
+        self._build_actions(scroll, row=4)
+        self._build_progress_card(scroll, row=5)
         self._build_log_panel(right)
         self._apply_mode_visibility()
         self.root.bind("<Control-z>", lambda _event: self._undo_lut())
@@ -423,13 +485,21 @@ class GraderGUI:
         head.grid(row=0, column=0, sticky="ew", padx=16, pady=(8, 1))
         head.grid_columnconfigure(0, weight=1)
         ctk.CTkLabel(
-            head, text="3D LUT", font=FONT_SECTION, text_color=TEXT,
+            head, text="色彩管理", font=FONT_SECTION, text_color=TEXT,
             anchor="w",
         ).grid(row=0, column=0, sticky="w")
+        self.color_mode_button = ctk.CTkSegmentedButton(
+            head, values=["色彩还原", "调色"], variable=self.color_mode_var,
+            command=self._on_color_mode_change, height=26, corner_radius=8,
+            fg_color="#0b1526", selected_color=ACCENT_DARK,
+            selected_hover_color="#0f766e", unselected_color="#1b2b46",
+            unselected_hover_color="#284261", text_color=TEXT, font=FONT_SMALL,
+        )
+        self.color_mode_button.grid(row=0, column=1, sticky="e", padx=(8, 10))
         self.lut_count_label = ctk.CTkLabel(
             head, text="", font=FONT_SMALL_BOLD, text_color=ACCENT,
         )
-        self.lut_count_label.grid(row=0, column=1, sticky="e")
+        self.lut_count_label.grid(row=0, column=2, sticky="e")
         self.lut_status_label = ctk.CTkLabel(
             card, textvariable=self.lut_status_var, font=FONT_MONO,
             text_color=OK, anchor="w", justify="left", wraplength=545,
@@ -450,35 +520,39 @@ class GraderGUI:
             ("浏览网络热门LUT库", "network"),
             ("浏览自定义LUT库", "custom"),
         )
+        self.browse_buttons = {}
         for index, (label, mode) in enumerate(browse_specs):
-            ctk.CTkButton(
+            button = ctk.CTkButton(
                 browse_buttons, text=label, width=1, height=30, corner_radius=9,
                 fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
                 font=FONT_SMALL, command=lambda value=mode: self._open_lut_library(value),
-            ).grid(row=0, column=index, sticky="ew", padx=3)
+            )
+            button.grid(row=0, column=index, sticky="ew", padx=3)
+            self.browse_buttons[mode] = button
 
         buttons = ctk.CTkFrame(card, fg_color="transparent")
         buttons.grid(row=4, column=0, sticky="w", padx=14, pady=(7, 8))
-        ctk.CTkButton(
+        self.import_lut_button = ctk.CTkButton(
             buttons, text="导入 .cube", width=92, height=30, corner_radius=9,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
-            command=self._choose_lut,
-        
-                font=FONT_SMALL,).pack(side="left", padx=7)
-        ctk.CTkButton(
+            command=self._choose_lut, font=FONT_SMALL,
+        )
+        self.import_lut_button.pack(side="left", padx=7)
+        self.sync_lut_button = ctk.CTkButton(
             buttons, text="同步DJI官方LUT库", width=140, height=30, corner_radius=9,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
-            command=self._update_lut_library,
-        
-                font=FONT_SMALL,).pack(side="left")
+            command=self._update_lut_library, font=FONT_SMALL,
+        )
+        self.sync_lut_button.pack(side="left")
         ctk.CTkButton(
             buttons, text="打开目录", width=86, height=30, corner_radius=9,
             fg_color="transparent", hover_color="#1b2b46", text_color=MUTED,
             border_width=1, border_color=BORDER, command=self._open_luts,
-        
-                font=FONT_SMALL,).pack(side="left", padx=7)
+            font=FONT_SMALL,
+        ).pack(side="left", padx=7)
 
         strength_row = ctk.CTkFrame(card, fg_color="transparent")
+        self.strength_row = strength_row
         strength_row.grid(row=5, column=0, sticky="ew", padx=16, pady=(0, 8))
         strength_row.grid_columnconfigure(1, weight=1)
         ctk.CTkLabel(
@@ -498,11 +572,12 @@ class GraderGUI:
             font=FONT_SMALL_BOLD, text_color=ACCENT, width=38,
         )
         self.strength_value_label.grid(row=0, column=2, sticky="e")
+        self._build_quick_card(card)
 
     def _build_quick_card(self, parent) -> None:
-        card = self._card(parent)
+        card = ctk.CTkFrame(parent, fg_color="transparent")
         self.quick_card = card
-        card.grid(row=3, column=0, sticky="ew", pady=(0, 9))
+        card.grid(row=6, column=0, sticky="ew", padx=0, pady=(0, 2))
         card.grid_columnconfigure(0, weight=1)
         head = ctk.CTkFrame(card, fg_color="transparent")
         head.grid(row=0, column=0, sticky="ew", padx=16, pady=(8, 2))
@@ -557,10 +632,9 @@ class GraderGUI:
             return
         if self.simple_mode:
             self.settings_card.grid_remove()
-            self.quick_card.grid()
         else:
-            self.quick_card.grid_remove()
             self.settings_card.grid()
+        self._apply_color_mode_visibility()
 
     def _current_lut_state(self) -> tuple[str, int]:
         return self.lut_path_var.get(), int(self.lut_strength_var.get())
@@ -639,17 +713,13 @@ class GraderGUI:
             )
             return
         self._push_lut_history()
+        self.color_mode_var.set("调色")
         self.lut_path_var.set(str(template.path))
         percent = int(round(template.strength * 100))
-        self.lut_strength_var.set(percent)
-        try:
-            self.strength_slider.set(percent)
-        except Exception:
-            pass
-        self.strength_value_label.configure(text=f"{percent}%")
-        self.config.lut_strength = float(template.strength)
+        self._set_strength(percent)
         self._refresh_lut_library()
         self._refresh_lut_label()
+        self._apply_color_mode_visibility()
         self.template_status_var.set(f"已应用：{template.label} · {template.description}")
         self._append_log("INFO", f"快速模板：{template.label}（强度 {percent}%）")
         self.status_var.set(f"已应用模板：{template.label}")
@@ -676,7 +746,7 @@ class GraderGUI:
     def _build_settings_card(self, parent) -> None:
         card = self._card(parent)
         self.settings_card = card
-        card.grid(row=4, column=0, sticky="ew", pady=(0, 9))
+        card.grid(row=3, column=0, sticky="ew", pady=(0, 9))
         card.grid_columnconfigure(0, weight=1)
         ctk.CTkLabel(
             card, text="处理设置", font=FONT_SECTION, text_color=TEXT,
@@ -1995,8 +2065,14 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
     def _apply_lut_entry(self, entry) -> None:
         self._push_lut_history()
         self.lut_path_var.set(str(entry.path))
+        if self._is_official_lut_path(entry.path):
+            self.color_mode_var.set("色彩还原")
+            self._set_strength(100)
+        else:
+            self.color_mode_var.set("调色")
         self._refresh_lut_library()
         self._refresh_lut_label()
+        self._apply_color_mode_visibility()
         detail = f"已选择 LUT：{entry.device} / {entry.category} / {entry.name}"
         if entry.profile:
             detail += f"（{entry.profile}）"
@@ -2080,8 +2156,10 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
             return
         self._push_lut_history()
         self.lut_path_var.set(str(local_path))
+        self.color_mode_var.set("调色")
         self._refresh_lut_library()
         self._refresh_lut_label()
+        self._apply_color_mode_visibility()
         self._append_log("INFO", f"已选择 LUT：{local_path}（{lut.size}^3）")
         if copied:
             self._append_log("INFO", "外部 LUT 已复制到项目内 luts/custom/")

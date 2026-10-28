@@ -1,7 +1,7 @@
 # DJI D-Log M Batch Grader — Windows GUI EXE
 
 **作者：Hu080608**  
-**版本：3.8.0**  
+**版本：3.8.1**  
 **许可：商业软件，购买后授权使用**  
 **仅 Windows 10/11 x64 GUI 版本，无 CLI**
 
@@ -102,6 +102,10 @@ luts\DJI Air 3S\Normalization\DJI Air 3s DJI D-Log M to Rec.709.cube
 已内置 **55 个 DJI 官方 LUT，覆盖 25 个设备/系列**，包括 D-Log/D-Log M 还原 LUT 和 Action 4/5 Pro、Pocket 3 官方 Color Grading LUT。默认 Air 3S 路径保持不变。
 
 简易模式提供 8 个快速模板、一键推荐、风格强度和批量导出；专业模式保留完整 LUT、RAW、编码和并发控制。
+
+“色彩管理”卡片分为两个模式：
+- 色彩还原：使用 DJI 官方 LUT，强度固定 100%。
+- 调色：使用网络热门或自定义 LUT，可调强度、套用模板、撤销/重做。
 
 另新增 **58 个“热门网络 LUT”**（D-Log M 直用复合版本，本次新增 30 个），按电影感、胶片风、日系清新、赛博朋克、复古暖调、自然风光、冷调夜景、黑白纪实和实验风格分类；来源与 MIT 许可见 `luts\热门网络 LUT\SOURCES.md`。
 

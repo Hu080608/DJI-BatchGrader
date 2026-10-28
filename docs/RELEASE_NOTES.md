@@ -1,10 +1,17 @@
-# DJI D-Log M Batch Grader v3.8.0
+# DJI D-Log M Batch Grader v3.8.1
 
 <!-- UPDATE_SUMMARY_START -->
-- 新增简易/专业模式切换，简易模式提供快速模板和一键推荐。
-- 新增 8 个批量调色模板和全局风格强度滑杆。
-- 支持基础撤销/重做，保留原有 LUT、RAW、队列和编码能力。
+- 合并“3D LUT”和“快速调色”为“色彩管理”卡片。
+- 官方 LUT 归为“色彩还原”，强度固定 100%。
+- 网络热门/自定义 LUT 归为“调色”，可使用模板和强度滑杆。
 <!-- UPDATE_SUMMARY_END -->
+
+## 色彩管理分区
+
+- “3D LUT”和“快速调色”合并为单个“色彩管理”卡片。
+- “色彩还原”模式只展示官方 LUT 入口，使用官方 LUT 时风格强度固定为 100%。
+- “调色”模式展示网络热门 LUT、自定义 LUT、快速模板、风格强度和一键推荐。
+- 模式切换会自动选择安全的默认 LUT，不会覆盖原素材。
 
 ## 大众化批量调色（MVP）
 
@@ -159,8 +166,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.8.0.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.8.0.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.8.1.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.8.1.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 
