@@ -21,6 +21,43 @@ class UpdaterTests(unittest.TestCase):
         self.assertEqual(format_eta(None), "计算中")
         self.assertIn("秒", format_eta(12))
 
+    def test_cleanup_keeps_current_and_one_previous_archive(self):
+        work = PROJECT_ROOT / "temp" / "updater_cleanup_unit"
+        shutil.rmtree(work, ignore_errors=True)
+        updates = work / "updates"
+        updates.mkdir(parents=True)
+        for version in ("1.0.0", "1.0.1", "1.0.2"):
+            (updates / f"DJI_DLogM_BatchGrader_Windows_x64_v{version}.zip").write_bytes(version.encode())
+        (updates / "stage_v1.0.0").mkdir()
+        (updates / "stage_v1.0.2").mkdir()
+        (updates / "asset.zip.part").write_bytes(b"partial")
+        (updates / "custom_luts_backup").mkdir()
+        (updates / "DJI_Updater_runtime_old.exe").write_bytes(b"old")
+        (updates / "DJI_Updater_runtime_new.exe").write_bytes(b"new")
+        request_path = updates / "update_request.json"
+        request = UpdateRequest(
+            version="1.0.2",
+            current_version="1.0.1",
+            url="https://example.invalid/update.zip",
+            sha256="0" * 64,
+            asset_name="DJI_DLogM_BatchGrader_Windows_x64_v1.0.2.zip",
+            asset_size=1,
+            app_root=str(work / "app"),
+        )
+        engine = UpdateEngine(request, request_path)
+        engine._cleanup_updates_after_success()
+        remaining = sorted(p.name for p in updates.glob("*.zip"))
+        self.assertIn("DJI_DLogM_BatchGrader_Windows_x64_v1.0.1.zip", remaining)
+        self.assertIn("DJI_DLogM_BatchGrader_Windows_x64_v1.0.2.zip", remaining)
+        self.assertNotIn("DJI_DLogM_BatchGrader_Windows_x64_v1.0.0.zip", remaining)
+        self.assertFalse((updates / "stage_v1.0.0").exists())
+        self.assertFalse((updates / "stage_v1.0.2").exists())
+        self.assertFalse((updates / "asset.zip.part").exists())
+        self.assertFalse((updates / "custom_luts_backup").exists())
+        self.assertLessEqual(len(list(updates.glob("DJI_Updater_runtime_*.exe"))), 1)
+        self.assertIn("cleanup done", (updates / "cleanup.log").read_text(encoding="utf-8"))
+        shutil.rmtree(work)
+
     def test_install_preserves_user_data(self):
         work = PROJECT_ROOT / "temp" / "updater_unit"
         shutil.rmtree(work, ignore_errors=True)

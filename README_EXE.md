@@ -1,7 +1,7 @@
 # DJI D-Log M Batch Grader — Windows GUI EXE
 
 **作者：Hu080608**  
-**版本：3.6.2**  
+**版本：3.7.0**  
 **许可：商业软件，购买后授权使用**  
 **仅 Windows 10/11 x64 GUI 版本，无 CLI**
 
@@ -101,7 +101,7 @@ luts\DJI Air 3S\Normalization\DJI Air 3s DJI D-Log M to Rec.709.cube
 
 已内置 **55 个 DJI 官方 LUT，覆盖 25 个设备/系列**，包括 D-Log/D-Log M 还原 LUT 和 Action 4/5 Pro、Pocket 3 官方 Color Grading LUT。默认 Air 3S 路径保持不变。
 
-另新增 **28 个“热门网络 LUT”**（D-Log M 直用复合版本），按电影感、胶片风、日系清新、赛博朋克、复古暖调、自然风光、冷调夜景和实验风格分类；来源与 MIT 许可见 `luts\热门网络 LUT\SOURCES.md`。
+另新增 **58 个“热门网络 LUT”**（D-Log M 直用复合版本，本次新增 30 个），按电影感、胶片风、日系清新、赛博朋克、复古暖调、自然风光、冷调夜景、黑白纪实和实验风格分类；来源与 MIT 许可见 `luts\热门网络 LUT\SOURCES.md`。
 
 其他 LUT 可按以下结构放置，GUI 自动扫描：
 
@@ -125,6 +125,7 @@ luts\<设备名>\<Normalization 或 Color Grading>\<look>.cube
 - 默认本地离线处理，不上传素材。
 - 匿名诊断写入 `logs\diagnostics\`，只有配置 `telemetry_endpoint` 才会上传。
 - 应用更新只从 GitHub Releases 检查。确认后会关闭主窗口并打开独立进度页，显示下载、校验、解压、安装和启动新版本进度。
+- 更新成功并确认新版本窗口出现后，自动清理 `updates\` 旧文件，最多保留当前版本和 1 个上一版本更新包；失败时保留回滚文件。
 - 仓库：https://github.com/Hu080608/DJI-BatchGrader
 - 详见 `docs\PRIVACY.md`、`docs\GITHUB_RELEASES.md`。
 
@@ -153,6 +154,6 @@ https://github.com/Hu080608/DJI-BatchGrader/releases
 
 - 当前 EXE 未代码签名；商发前请使用 `tools\sign_exe.ps1` 完成签名。
 - FFmpeg 为 GPL 构建，分发前需完成许可证合规审核。
-- 已内置 55 个 DJI 官方 LUT 和 28 个热门网络风格 LUT；旧 Phantom/X5 包中的 1D gamma shaper 不适用于 3D LUT 流程，未作为可选项。
+- 已内置 55 个 DJI 官方 LUT 和 58 个热门网络风格 LUT；旧 Phantom/X5 包中的 1D gamma shaper 不适用于 3D LUT 流程，未作为可选项。
 - `.SRT` 自动忽略；嵌入字幕不转码。
 - 应用更新唯一来源为 GitHub Releases，详见 `docs\GITHUB_RELEASES.md`。

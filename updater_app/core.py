@@ -10,8 +10,10 @@ import ctypes
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -428,6 +430,77 @@ class UpdateEngine:
         except Exception as exc:
             raise UpdateError(f"安装新版本失败：{exc}") from exc
 
+    def _append_cleanup_log(self, message: str) -> None:
+        try:
+            self.updates_dir.mkdir(parents=True, exist_ok=True)
+            line = (
+                f"{datetime.now().astimezone().isoformat(timespec='seconds')} "
+                f"{message}" + chr(10)
+            )
+            with (self.updates_dir / "cleanup.log").open("a", encoding="utf-8") as handle:
+                handle.write(line)
+        except Exception:
+            pass
+
+    @staticmethod
+    def _version_key(value: str) -> tuple[int, ...]:
+        parts = [int(x) for x in re.findall(r"\d+", value)[:4]]
+        return tuple(parts + [0] * (4 - len(parts)))
+
+    def _cleanup_updates_after_success(self) -> None:
+        """Keep current + one previous archive; remove stale stages/partials."""
+        current = self.request.version
+        previous = self.request.current_version
+        keep = {current}
+        if previous:
+            keep.add(previous)
+        self._append_cleanup_log(
+            f"cleanup start current={current} previous={previous or '-'} keep={sorted(keep)}"
+        )
+        for archive in sorted(self.updates_dir.glob("*.zip")):
+            match = re.search(r"v(\d+(?:\.\d+){1,3})", archive.name, re.IGNORECASE)
+            version = match.group(1) if match else ""
+            if archive.name == self.request.asset_name or version in keep:
+                self._append_cleanup_log(f"cleanup keep archive {archive.name}")
+                continue
+            try:
+                archive.unlink()
+                self._append_cleanup_log(f"cleanup removed archive {archive.name}")
+            except Exception as exc:
+                self._append_cleanup_log(f"cleanup failed archive {archive.name}: {exc}")
+        for partial in sorted(self.updates_dir.glob("*.part")):
+            try:
+                partial.unlink()
+                self._append_cleanup_log(f"cleanup removed partial {partial.name}")
+            except Exception as exc:
+                self._append_cleanup_log(f"cleanup failed partial {partial.name}: {exc}")
+        for stage in sorted(self.updates_dir.glob("stage_*")):
+            if not stage.is_dir():
+                continue
+            try:
+                shutil.rmtree(stage)
+                self._append_cleanup_log(f"cleanup removed stage {stage.name}")
+            except Exception as exc:
+                self._append_cleanup_log(f"cleanup failed stage {stage.name}: {exc}")
+        backup = self.updates_dir / "custom_luts_backup"
+        if backup.exists():
+            try:
+                shutil.rmtree(backup)
+                self._append_cleanup_log("cleanup removed custom_luts_backup")
+            except Exception as exc:
+                self._append_cleanup_log(f"cleanup failed custom_luts_backup: {exc}")
+        runtimes = sorted(
+            self.updates_dir.glob("DJI_Updater_runtime_*.exe"),
+            key=lambda item: item.stat().st_mtime,
+        )
+        for runtime in runtimes[:-1]:
+            try:
+                runtime.unlink()
+                self._append_cleanup_log(f"cleanup removed updater runtime {runtime.name}")
+            except Exception as exc:
+                self._append_cleanup_log(f"cleanup failed runtime {runtime.name}: {exc}")
+        self._append_cleanup_log("cleanup done")
+
     def _launch(self) -> None:
         exe = self.app_root / APP_EXE
         if not exe.exists():
@@ -445,6 +518,11 @@ class UpdateEngine:
 
         if not _wait_for_main_window(process.pid):
             raise UpdateError("新版本启动超时，请重试或退出后手动打开软件")
+        self._emit("cleaning", "新版本已打开，正在清理旧版本文件…", 99)
+        try:
+            self._cleanup_updates_after_success()
+        except Exception as exc:
+            self._append_cleanup_log(f"cleanup top-level failure: {exc}")
         self._emit("completed", "新版本已成功打开", 100)
 
     def run(self) -> None:

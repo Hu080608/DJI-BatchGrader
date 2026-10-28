@@ -1,9 +1,31 @@
-# DJI D-Log M Batch Grader v3.6.2
+# DJI D-Log M Batch Grader v3.7.0
 
 <!-- UPDATE_SUMMARY_START -->
-- 三个 LUT 浏览按钮统一为同一种按钮颜色。
-- “同步 LUT 库”更名为“同步DJI官方LUT库”。
+- 新增 30 个热门网络风格 LUT，网络分区累计 58 个。
+- 网络 LUT 统一为 17³ 网格，LUT 资源体积明显缩小。
+- 更新成功后自动清理 updates，仅保留当前版本和最多 1 个上一版本包。
 <!-- UPDATE_SUMMARY_END -->
+
+## 网络热门 LUT 扩容
+
+- 新增 30 个 D-Log M 直用网络风格 LUT，网络分区累计 58 个，全库 113 个。
+- 新增黑白纪实分类：高反差黑白、Kodak Double-X、Kodak Tri-X 400、Ilford HP5。
+- 新增电影感年代片、胶片负片、日系、赛博朋克、自然风光和实验风格条目。
+- 所有新增条目均写入 `manifest.json`，包含风格、场景、来源 URL、MIT 许可和 SHA-256。
+
+## LUT 体积优化
+
+- 网络 LUT 统一输出为 17³ 网格。
+- 网络 LUT 资源目录由约 27 MB 降至约 7.8 MB。
+- 原有 DJI 官方 LUT 不重新编码、不改名、不改变调用路径。
+
+## updates 清理策略
+
+- 只有在新版本主窗口真正出现后才执行清理。
+- 保留当前版本更新包和最多 1 个上一版本更新包。
+- 删除旧版本压缩包、残留 `.part`、解压 stage 目录、自定义 LUT 临时备份和旧更新器运行时文件。
+- 清理过程写入 `updates/cleanup.log`。
+- 下载失败、校验失败或安装失败时不执行清理，保留回滚所需文件。
 
 ## 界面调整
 
@@ -115,8 +137,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.6.2.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.6.2.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.7.0.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.7.0.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 

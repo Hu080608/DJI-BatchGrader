@@ -1,6 +1,6 @@
 # DJI LUT Library / DJI LUT 库
 
-本目录已内置 **83 个 3D LUT 文件**：55 个 DJI 官方 LUT（覆盖 25 个设备/系列）和 28 个“热门网络 LUT”风格。
+本目录已内置 **113 个 3D LUT 文件**：55 个 DJI 官方 LUT（覆盖 25 个设备/系列）和 58 个“热门网络 LUT”风格。
 
 ## 目录结构
 
@@ -9,7 +9,7 @@ luts/
 ├─ manifest.json                 # 自动生成：设备、类别、SHA-256、来源 URL
 ├─ SOURCES.md                    # DJI 官方来源链接清单
 ├─ DOWNLOAD_REPORT.json          # DJI 官方下载/校验结果
-├─ 热门网络 LUT/                 # 28 个 D-Log M 直用网络风格 LUT
+├─ 热门网络 LUT/                 # 58 个 D-Log M 直用网络风格 LUT
 │  ├─ README.md                  # 分区说明与使用注意
 │  ├─ SOURCES.md                 # 风格来源、适用场景、MIT 许可清单
 │  ├─ THIRD_PARTY_LICENSES/      # 源 LUT 的 MIT 许可文本
@@ -20,6 +20,7 @@ luts/
 │  ├─ 复古暖调/
 │  ├─ 自然风光/
 │  ├─ 冷调夜景/
+│  ├─ 黑白纪实/
 │  └─ 实验风格/
 ├─ DJI Air 3S/
 │  └─ Normalization/
