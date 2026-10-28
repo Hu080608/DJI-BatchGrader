@@ -187,10 +187,6 @@ class GraderGUI:
         self.progress_text_var = tk.StringVar(value="0%")
         self.input_status_var = tk.StringVar(value="")
         self.lut_status_var = tk.StringVar(value="")
-        if self.config.input_dir:
-            candidate = project_path(self.config.input_dir)
-            if candidate.exists():
-                self.input_path = candidate
 
     def _card(self, parent) -> ctk.CTkFrame:
         return ctk.CTkFrame(
@@ -1010,6 +1006,9 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
         self.last_jobs = []
         self.job_rows.clear()
         self._clear_queue_view()
+        self.input_path = None
+        self.selected_files = []
+        self._update_input_status()
         self._last_batch_duration_text = "—"
         self.progressbar.set(0)
         self.progress_text_var.set("0%")
@@ -1915,7 +1914,8 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
         cfg.telemetry_enabled = bool(self.telemetry_var.get())
         cfg.auto_check_updates = bool(self.auto_update_var.get())
         cfg.auto_update_luts = bool(self.auto_lut_update_var.get())
-        cfg.input_dir = str(input_dir)
+        # Input selection is intentionally session-only and never persisted.
+        cfg.input_dir = ""
         cfg.output_dir = str(output_dir)
         problems = cfg.validate()
         if problems:

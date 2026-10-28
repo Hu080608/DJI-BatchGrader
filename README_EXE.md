@@ -1,7 +1,7 @@
 # DJI D-Log M Batch Grader — Windows GUI EXE
 
 **作者：Hu080608**  
-**版本：3.7.1**  
+**版本：3.7.2**  
 **许可：商业软件，购买后授权使用**  
 **仅 Windows 10/11 x64 GUI 版本，无 CLI**
 
@@ -112,6 +112,8 @@ luts\<设备名>\<Normalization 或 Color Grading>\<look>.cube
 详见 `luts\README.md`、`luts\SOURCES.md` 和 `luts\manifest.json`。
 
 ## 7. 监听文件夹
+
+输入素材区域每次启动为空，不自动恢复上次选择的文件夹。
 
 启用“监听输入文件夹”后：
 

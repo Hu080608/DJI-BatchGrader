@@ -1,7 +1,7 @@
 # DJI D-Log M Batch Grader
 
 **作者：Hu080608**  
-**版本：3.7.1**  
+**版本：3.7.2**  
 **平台：Windows 10/11 x64**  
 **许可：商业软件，买断授权**
 
@@ -67,7 +67,7 @@ https://github.com/Hu080608/DJI-BatchGrader/releases
 下载最新的：
 
 ```text
-DJI_DLogM_BatchGrader_Windows_x64_v3.7.1.zip
+DJI_DLogM_BatchGrader_Windows_x64_v3.7.2.zip
 ```
 
 ### 2. 解压并启动
@@ -144,7 +144,7 @@ config\settings.json
 
 常用设置：
 
-- `input_dir` / `output_dir`：默认输入、输出目录
+- `output_dir`：默认输出目录；输入目录不写入配置，每次启动为空
 - `recursive`：是否扫描子目录
 - `import_scope`：`all`（全部）/ `video_raw`（视频 + RAW）/ `video_only`（只处理视频）
 - `output_profile`：输出格式

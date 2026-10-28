@@ -1,9 +1,16 @@
-# DJI D-Log M Batch Grader v3.7.1
+# DJI D-Log M Batch Grader v3.7.2
 
 <!-- UPDATE_SUMMARY_START -->
-- 网络 LUT 恢复为 33³ 网格，提升渐变和肤色过渡精度。
-- LUT 总数与分类保持不变：全库 113 个，网络分区 58 个。
+- 启动时不再恢复上次选择的输入文件夹。
+- 输入素材区域始终以空状态打开。
+- 输入目录不再写入 settings.json。
 <!-- UPDATE_SUMMARY_END -->
+
+## 输入素材启动清空
+
+- 每次启动软件时，输入素材区域为空，不加载上次文件夹或文件。
+- 输入路径仅用于当前会话，不写入 `config/settings.json`。
+- 输出目录、LUT、处理范围等其他配置仍正常保留。
 
 ## LUT 网格恢复
 
@@ -143,8 +150,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.7.1.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.7.1.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.7.2.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.7.2.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 
