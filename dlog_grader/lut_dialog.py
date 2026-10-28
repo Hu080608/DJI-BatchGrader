@@ -68,45 +68,53 @@ class LutLibraryDialog(ctk.CTkToplevel):
 
         filters = ctk.CTkFrame(self, fg_color=CARD, corner_radius=12, border_width=1, border_color=BORDER)
         filters.grid(row=1, column=0, sticky="ew", padx=20, pady=(0, 10))
-        filters.grid_columnconfigure(3, weight=1)
+        filters.grid_columnconfigure(4, weight=1)
+        self.collection_var = tk.StringVar(value="全部类型")
         self.device_var = tk.StringVar(value="全部设备")
         self.category_var = tk.StringVar(value="全部类别")
         self.source_var = tk.StringVar(value="全部来源")
         self.search_var = tk.StringVar(value="")
-        self.device_menu = ctk.CTkOptionMenu(
-            filters, values=["全部设备"], variable=self.device_var,
-            width=160, height=32, corner_radius=8, fg_color="#1b2b46",
+        self.collection_menu = ctk.CTkOptionMenu(
+            filters, values=["全部类型", "DJI官方", "热门网络", "自定义"], variable=self.collection_var,
+            width=116, height=32, corner_radius=8, fg_color="#1b2b46",
             button_color="#284261", button_hover_color=ACCENT_DARK, text_color=TEXT,
             font=FONT_SMALL, command=lambda _v: self._apply_filter(),
         )
-        self.device_menu.grid(row=0, column=0, padx=(12, 6), pady=10)
+        self.collection_menu.grid(row=0, column=0, padx=(12, 6), pady=10)
+        self.device_menu = ctk.CTkOptionMenu(
+            filters, values=["全部设备"], variable=self.device_var,
+            width=150, height=32, corner_radius=8, fg_color="#1b2b46",
+            button_color="#284261", button_hover_color=ACCENT_DARK, text_color=TEXT,
+            font=FONT_SMALL, command=lambda _v: self._apply_filter(),
+        )
+        self.device_menu.grid(row=0, column=1, padx=6, pady=10)
         self.category_menu = ctk.CTkOptionMenu(
             filters, values=["全部类别"], variable=self.category_var,
             width=130, height=32, corner_radius=8, fg_color="#1b2b46",
             button_color="#284261", button_hover_color=ACCENT_DARK, text_color=TEXT,
             font=FONT_SMALL, command=lambda _v: self._apply_filter(),
         )
-        self.category_menu.grid(row=0, column=1, padx=6, pady=10)
+        self.category_menu.grid(row=0, column=2, padx=6, pady=10)
         self.source_menu = ctk.CTkOptionMenu(
             filters, values=["全部来源", "默认", "自定义"], variable=self.source_var,
             width=108, height=32, corner_radius=8, fg_color="#1b2b46",
             button_color="#284261", button_hover_color=ACCENT_DARK, text_color=TEXT,
             font=FONT_SMALL, command=lambda _v: self._apply_filter(),
         )
-        self.source_menu.grid(row=0, column=2, padx=6, pady=10)
+        self.source_menu.grid(row=0, column=3, padx=6, pady=10)
         search = ctk.CTkEntry(
             filters, textvariable=self.search_var, placeholder_text="搜索设备 / LUT 名称 / 风格",
             height=32, corner_radius=8, fg_color=CARD_ALT, border_color=BORDER,
             text_color=TEXT, font=FONT_SMALL,
         )
-        search.grid(row=0, column=3, sticky="ew", padx=6, pady=10)
+        search.grid(row=0, column=4, sticky="ew", padx=6, pady=10)
         self.search_var.trace_add("write", lambda *_args: self._apply_filter())
         ctk.CTkButton(
             filters, text="重置", width=62, height=32, corner_radius=8,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
             command=self._reset_filters,
         
-                font=FONT_SMALL,).grid(row=0, column=4, padx=(6, 12), pady=10)
+                font=FONT_SMALL,).grid(row=0, column=5, padx=(6, 12), pady=10)
 
         table_frame = ctk.CTkFrame(self, fg_color=CARD_ALT, corner_radius=10)
         table_frame.grid(row=2, column=0, sticky="nsew", padx=20, pady=(0, 8))
@@ -183,6 +191,7 @@ class LutLibraryDialog(ctk.CTkToplevel):
         self.source_menu.configure(values=["全部来源"] + origins)
 
     def _reset_filters(self) -> None:
+        self.collection_var.set("全部类型")
         self.device_var.set("全部设备")
         self.category_var.set("全部类别")
         self.source_var.set("全部来源")
@@ -190,12 +199,22 @@ class LutLibraryDialog(ctk.CTkToplevel):
         self._apply_filter()
 
     def _apply_filter(self) -> None:
+        collection = self.collection_var.get()
         device = self.device_var.get()
         category = self.category_var.get()
         source = self.source_var.get()
         query = self.search_var.get().strip().casefold()
         self.filtered = []
         for entry in self.entries:
+            is_network = entry.device == "热门网络 LUT"
+            is_custom = entry.origin == "自定义"
+            is_official = entry.origin == "默认" and not is_network
+            if collection == "DJI官方" and not is_official:
+                continue
+            if collection == "热门网络" and not is_network:
+                continue
+            if collection == "自定义" and not is_custom:
+                continue
             if device != "全部设备" and entry.device != device:
                 continue
             if category != "全部类别" and entry.category != category:

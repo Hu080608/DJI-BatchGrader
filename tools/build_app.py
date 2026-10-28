@@ -60,6 +60,11 @@ def assemble_runtime_data() -> None:
     tools_dir = TARGET / "tools"
     tools_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "tools" / "ffmpeg.exe", tools_dir / "ffmpeg.exe")
+    preview_asset = ROOT / "assets" / "preview_sample.jpg"
+    if preview_asset.exists():
+        assets_target = TARGET / "assets"
+        assets_target.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(preview_asset, assets_target / "preview_sample.jpg")
     shutil.copy2(ROOT / "tools" / "README_FFMPEG.txt", tools_dir / "README_FFMPEG.txt")
 
     docs_dir = TARGET / "docs"

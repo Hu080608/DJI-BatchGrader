@@ -1,12 +1,21 @@
-# DJI D-Log M Batch Grader v3.8.1
+# DJI D-Log M Batch Grader v3.8.2
 
 <!-- UPDATE_SUMMARY_START -->
-- 合并“3D LUT”和“快速调色”为“色彩管理”卡片。
-- 官方 LUT 归为“色彩还原”，强度固定 100%。
-- 网络热门/自定义 LUT 归为“调色”，可使用模板和强度滑杆。
+- 三个 LUT 浏览按钮合并为一个“浏览LUT库”，进入后按来源和类别筛选。
+- “色彩还原 / 调色”改为大按钮并移到卡片下方。
+- 调色模式新增动态对比预览，支持默认样片、队列素材、图片和视频。
 <!-- UPDATE_SUMMARY_END -->
 
-## 色彩管理分区
+## 色彩管理交互调整
+
+- “浏览官方LUT库”“浏览网络热门LUT库”“浏览自定义LUT库”合并为一个“浏览LUT库”。
+- 进入 LUT 库后可按“DJI官方 / 热门网络 / 自定义”类型、设备、类别和名称筛选。
+- “色彩还原 / 调色”模式按钮从右上角移到卡片下方，并放大显示。
+- 调色模式新增“预览”按钮：
+  - 默认提供内置样片；
+  - 可选择队列中的图片或视频；
+  - 支持浏览本地图片/视频；
+  - 调整风格强度时，原始画面与效果画面实时对比。
 
 - “3D LUT”和“快速调色”合并为单个“色彩管理”卡片。
 - “色彩还原”模式只展示官方 LUT 入口，使用官方 LUT 时风格强度固定为 100%。
@@ -166,8 +175,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.8.1.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.8.1.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.8.2.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.8.2.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 

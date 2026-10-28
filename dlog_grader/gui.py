@@ -23,6 +23,7 @@ from .lut_library import scan_lut_library
 from .lut_updater import auto_lut_check_due, check_and_update_luts
 from .formats import OUTPUT_PROFILES, QUALITY_PRESETS, get_output_profile, profile_labels, quality_preset_labels
 from .presets import DEFAULT_TEMPLATE, TEMPLATES, StyleTemplate, recommend_template
+from .preview_dialog import PreviewDialog
 from .jobs import (
     JOB_STATUS_LABELS, JOB_STATUS_ORDER, JobRecord, QueueStore,
     format_duration_hms, now_iso,
@@ -263,8 +264,8 @@ class GraderGUI:
                 self.strength_row.grid_remove()
             else:
                 self.strength_row.grid()
-        for mode, button in self.browse_buttons.items():
-            button.configure(state="normal" if (mode == "official") == official else "disabled")
+        if hasattr(self, "browse_lut_button"):
+            self.browse_lut_button.configure(state="normal")
         if hasattr(self, "import_lut_button"):
             self.import_lut_button.configure(state="disabled" if official else "normal")
         if hasattr(self, "sync_lut_button"):
@@ -488,50 +489,42 @@ class GraderGUI:
             head, text="色彩管理", font=FONT_SECTION, text_color=TEXT,
             anchor="w",
         ).grid(row=0, column=0, sticky="w")
-        self.color_mode_button = ctk.CTkSegmentedButton(
-            head, values=["色彩还原", "调色"], variable=self.color_mode_var,
-            command=self._on_color_mode_change, height=26, corner_radius=8,
-            fg_color="#0b1526", selected_color=ACCENT_DARK,
-            selected_hover_color="#0f766e", unselected_color="#1b2b46",
-            unselected_hover_color="#284261", text_color=TEXT, font=FONT_SMALL,
-        )
-        self.color_mode_button.grid(row=0, column=1, sticky="e", padx=(8, 10))
         self.lut_count_label = ctk.CTkLabel(
             head, text="", font=FONT_SMALL_BOLD, text_color=ACCENT,
         )
-        self.lut_count_label.grid(row=0, column=2, sticky="e")
+        self.lut_count_label.grid(row=0, column=1, sticky="e")
         self.lut_status_label = ctk.CTkLabel(
             card, textvariable=self.lut_status_var, font=FONT_MONO,
             text_color=OK, anchor="w", justify="left", wraplength=545,
         )
         self.lut_status_label.grid(row=1, column=0, sticky="ew", padx=16)
+        mode_row = ctk.CTkFrame(card, fg_color="transparent")
+        mode_row.grid(row=2, column=0, sticky="ew", padx=16, pady=(6, 2))
+        mode_row.grid_columnconfigure(0, weight=1)
+        self.color_mode_button = ctk.CTkSegmentedButton(
+            mode_row, values=["色彩还原", "调色"], variable=self.color_mode_var,
+            command=self._on_color_mode_change, height=34, corner_radius=9,
+            fg_color="#0b1526", selected_color=ACCENT_DARK,
+            selected_hover_color="#0f766e", unselected_color="#1b2b46",
+            unselected_hover_color="#284261", text_color=TEXT, font=FONT_BODY_BOLD,
+        )
+        self.color_mode_button.grid(row=0, column=0, sticky="ew")
         self.lut_meta_label = ctk.CTkLabel(
             card, textvariable=self.lut_meta_var, font=FONT_SMALL,
             text_color=MUTED, anchor="w", justify="left", wraplength=540,
         )
-        self.lut_meta_label.grid(row=2, column=0, sticky="ew", padx=16, pady=(2, 0))
+        self.lut_meta_label.grid(row=3, column=0, sticky="ew", padx=16, pady=(2, 0))
 
-        browse_buttons = ctk.CTkFrame(card, fg_color="transparent")
-        browse_buttons.grid(row=3, column=0, sticky="ew", padx=12, pady=(7, 0))
-        for index in range(3):
-            browse_buttons.grid_columnconfigure(index, weight=1)
-        browse_specs = (
-            ("浏览官方LUT库", "official"),
-            ("浏览网络热门LUT库", "network"),
-            ("浏览自定义LUT库", "custom"),
+        self.browse_lut_button = ctk.CTkButton(
+            card, text="浏览LUT库", height=34, corner_radius=9,
+            fg_color=ACCENT_DARK, hover_color="#0f766e", text_color=TEXT,
+            font=FONT_SMALL_BOLD, command=self._open_lut_library,
         )
-        self.browse_buttons = {}
-        for index, (label, mode) in enumerate(browse_specs):
-            button = ctk.CTkButton(
-                browse_buttons, text=label, width=1, height=30, corner_radius=9,
-                fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
-                font=FONT_SMALL, command=lambda value=mode: self._open_lut_library(value),
-            )
-            button.grid(row=0, column=index, sticky="ew", padx=3)
-            self.browse_buttons[mode] = button
+        self.browse_lut_button.grid(row=4, column=0, sticky="ew", padx=16, pady=(7, 0))
+        self.browse_buttons = {"all": self.browse_lut_button}
 
         buttons = ctk.CTkFrame(card, fg_color="transparent")
-        buttons.grid(row=4, column=0, sticky="w", padx=14, pady=(7, 8))
+        buttons.grid(row=5, column=0, sticky="w", padx=14, pady=(7, 8))
         self.import_lut_button = ctk.CTkButton(
             buttons, text="导入 .cube", width=92, height=30, corner_radius=9,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
@@ -553,7 +546,7 @@ class GraderGUI:
 
         strength_row = ctk.CTkFrame(card, fg_color="transparent")
         self.strength_row = strength_row
-        strength_row.grid(row=5, column=0, sticky="ew", padx=16, pady=(0, 8))
+        strength_row.grid(row=6, column=0, sticky="ew", padx=16, pady=(0, 8))
         strength_row.grid_columnconfigure(1, weight=1)
         ctk.CTkLabel(
             strength_row, text="风格强度", font=FONT_SMALL_BOLD,
@@ -577,7 +570,7 @@ class GraderGUI:
     def _build_quick_card(self, parent) -> None:
         card = ctk.CTkFrame(parent, fg_color="transparent")
         self.quick_card = card
-        card.grid(row=6, column=0, sticky="ew", padx=0, pady=(0, 2))
+        card.grid(row=7, column=0, sticky="ew", padx=0, pady=(0, 2))
         card.grid_columnconfigure(0, weight=1)
         head = ctk.CTkFrame(card, fg_color="transparent")
         head.grid(row=0, column=0, sticky="ew", padx=16, pady=(8, 2))
@@ -591,15 +584,20 @@ class GraderGUI:
             font=FONT_SMALL_BOLD, command=self._recommend_one_click,
         ).grid(row=0, column=1, sticky="e")
         ctk.CTkButton(
+            head, text="预览", width=58, height=28, corner_radius=8,
+            fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
+            font=FONT_SMALL, command=self._open_preview_dialog,
+        ).grid(row=0, column=2, sticky="e", padx=(6, 0))
+        ctk.CTkButton(
             head, text="撤销", width=54, height=28, corner_radius=8,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
             font=FONT_SMALL, command=self._undo_lut,
-        ).grid(row=0, column=2, sticky="e", padx=(6, 0))
+        ).grid(row=0, column=3, sticky="e", padx=(6, 0))
         ctk.CTkButton(
             head, text="重做", width=54, height=28, corner_radius=8,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
             font=FONT_SMALL, command=self._redo_lut,
-        ).grid(row=0, column=3, sticky="e", padx=(6, 0))
+        ).grid(row=0, column=4, sticky="e", padx=(6, 0))
         ctk.CTkLabel(
             card, textvariable=self.template_status_var, font=FONT_SMALL,
             text_color=MUTED, anchor="w", justify="left", wraplength=540,
@@ -723,6 +721,37 @@ class GraderGUI:
         self.template_status_var.set(f"已应用：{template.label} · {template.description}")
         self._append_log("INFO", f"快速模板：{template.label}（强度 {percent}%）")
         self.status_var.set(f"已应用模板：{template.label}")
+
+    def _open_preview_dialog(self) -> None:
+        path = project_path(self.lut_path_var.get())
+        if not path.exists():
+            messagebox.showerror("预览失败", "当前 LUT 文件不存在，请重新选择。")
+            return
+        try:
+            lut = CubeLUT.from_file(path)
+        except Exception as exc:
+            messagebox.showerror("预览失败", f"无法读取当前 LUT：{exc}")
+            return
+        sources: list[Path] = []
+        for job in self._all_job_dicts():
+            raw = str(job.get("source") or "").strip()
+            if raw and Path(raw).is_file():
+                sources.append(Path(raw))
+        for item in self.selected_files:
+            if item.is_file():
+                sources.append(item)
+        if self.input_path and self.input_path.is_file():
+            sources.append(self.input_path)
+        seen = set()
+        sources = [p for p in sources if not (str(p.resolve()) in seen or seen.add(str(p.resolve())))]
+        try:
+            PreviewDialog(
+                self.root, lut, self.lut_strength_var, sources,
+                on_strength=self._on_strength_change,
+                on_commit=self._commit_strength,
+            )
+        except Exception as exc:
+            messagebox.showerror("预览失败", str(exc))
 
     def _recommend_one_click(self) -> None:
         paths = list(self.selected_files)
@@ -1129,7 +1158,7 @@ DJI D-Log M Batch Grader 使用说明
 一、最快开始（4 步）
 1. 把照片、视频或整个文件夹拖到左上拖拽区域。
 2. 选择输出文件夹（默认软件目录下 output/）。
-3. 简易模式可直接点击“快速调色”模板或“一键推荐”；专业模式可在“3D LUT”区域选择 LUT。
+3. 简易模式可直接点击“快速调色”模板或“一键推荐”；专业模式可打开“浏览LUT库”，进入后按官方/热门网络/自定义筛选。
 4. 用“风格强度”调整效果强弱，再点击“开始批处理”。
 
 二、支持的输入
@@ -1157,9 +1186,9 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
 默认 LUT 库内置 113 个 3D LUT：55 个 DJI 官方 LUT（25 个设备/系列）和 58 个“热门网络 LUT”风格。
 程序默认每 24 小时检查一次 DJI 官方目录，发现新机型/LUT 会自动下载补充；
 也可以点击“同步DJI官方LUT库”手动检查。
-三个浏览按钮分别打开官方、热门网络和自定义 LUT 分区，均支持按设备、类别筛选和鼠标滚轮。
+点击“浏览LUT库”后，可在弹窗内按官方、热门网络、自定义类型以及设备、类别筛选，并支持鼠标滚轮。
 来源统一分为“默认”和“自定义”；“热门网络 LUT”属于默认内置分区，只有用户导入的 LUT 归为“自定义”。
-也可以点击“导入 .cube”加载自己的 LUT。
+也可以点击“导入 .cube”加载自己的 LUT。调色模式还提供“预览”，可对比默认样片或队列素材的前后效果。
 
 七、任务队列
 文件导入后会立即显示为“待处理”。
@@ -2094,27 +2123,12 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
         self._lut_update_thread = threading.Thread(target=_worker, daemon=True)
         self._lut_update_thread.start()
 
-    def _open_lut_library(self, mode: str = "official") -> None:
+    def _open_lut_library(self) -> None:
         if not self.lut_entries:
             self._refresh_lut_library()
         entries = list(self.lut_entries.values())
-        if mode == "official":
-            entries = [e for e in entries if e.origin == "默认" and e.device != "热门网络 LUT"]
-            title = "DJI 官方 LUT 库"
-            subtitle = "按 DJI 设备 / 类别筛选官方 LUT"
-        elif mode == "network":
-            entries = [e for e in entries if e.device == "热门网络 LUT"]
-            title = "热门网络 LUT 库"
-            subtitle = "按电影感、胶片风、日系、赛博朋克等风格筛选"
-        elif mode == "custom":
-            entries = [e for e in entries if e.origin == "自定义"]
-            title = "自定义 LUT 库"
-            subtitle = "用户导入或放置在 luts/custom/ 下的 LUT"
-        else:
-            title = "LUT 库"
-            subtitle = "滚动查看 / 搜索 / 按设备筛选，双击可直接使用"
         if not entries:
-            messagebox.showinfo(title, "当前分区没有可用的 LUT。")
+            messagebox.showinfo("LUT 库", "当前没有可用的 LUT。")
             return
         current = project_path(self.lut_path_var.get())
         LutLibraryDialog(
@@ -2122,8 +2136,8 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
             entries,
             current,
             self._apply_lut_entry,
-            title=title,
-            subtitle=subtitle,
+            title="LUT 库",
+            subtitle="进入后可按官方 / 热门网络 / 自定义、设备和类别筛选",
         )
 
     def _confirm_lut(self, candidate: LutCandidate) -> bool:
