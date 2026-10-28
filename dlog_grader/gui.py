@@ -352,16 +352,16 @@ class GraderGUI:
         )
         right.grid(row=0, column=1, sticky="nsew")
         right.grid_columnconfigure(0, weight=1)
-        right.grid_rowconfigure(1, weight=1)
+        right.grid_rowconfigure(0, weight=1)
 
         self._build_source_card(scroll)
         self._build_output_card(scroll)
         self._build_lut_card(scroll)
         self._build_settings_card(scroll)
         self._build_aux_card(scroll)
-        self._build_actions(scroll, row=5)
-        self._build_progress_card(scroll, row=6)
         self._build_log_panel(right)
+        self._build_actions(right, row=1)
+        self._build_progress_card(right, row=2)
         self._apply_mode_visibility()
         self.root.bind("<Control-z>", lambda _event: self._undo_lut())
         self.root.bind("<Control-y>", lambda _event: self._redo_lut())
@@ -913,7 +913,7 @@ class GraderGUI:
 
     def _build_actions(self, parent, row: int = 4) -> None:
         actions = ctk.CTkFrame(parent, fg_color="transparent")
-        actions.grid(row=row, column=0, sticky="ew", pady=(0, 9))
+        actions.grid(row=row, column=0, sticky="ew", padx=10, pady=(4, 5))
         actions.grid_columnconfigure(0, weight=1)
         self.start_btn = ctk.CTkButton(
             actions, text="开始批处理", height=38, corner_radius=11,
@@ -937,7 +937,7 @@ class GraderGUI:
 
     def _build_progress_card(self, parent, row: int = 5) -> None:
         card = self._card(parent)
-        card.grid(row=row, column=0, sticky="ew")
+        card.grid(row=row, column=0, sticky="ew", padx=10, pady=(0, 5))
         card.grid_columnconfigure(0, weight=1)
         top = ctk.CTkFrame(card, fg_color="transparent")
         top.grid(row=0, column=0, sticky="ew", padx=16, pady=(8, 2))
@@ -1066,7 +1066,7 @@ class GraderGUI:
             parent,
             text="作者：Hu080608   ·   本地离线处理   ·   日志 / 缓存 / 临时文件 / 报告均在软件目录内",
             font=FONT_SMALL, text_color=MUTED,
-        ).grid(row=1, column=0, pady=(0, 10))
+        ).grid(row=3, column=0, pady=(0, 10))
 
     def _maximize_window(self) -> None:
         try:
