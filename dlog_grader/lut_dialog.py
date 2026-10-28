@@ -33,6 +33,9 @@ class LutLibraryDialog(ctk.CTkToplevel):
         entries: list[LutEntry],
         current_path: Path | None,
         on_select: Callable[[LutEntry], None],
+        *,
+        title: str = "LUT 库",
+        subtitle: str = "滚动查看 / 搜索 / 按设备筛选，双击可直接使用",
     ):
         super().__init__(master)
         self.entries = sorted(entries, key=lambda e: (e.device.casefold(), e.category.casefold(), e.name.casefold()))
@@ -40,7 +43,7 @@ class LutLibraryDialog(ctk.CTkToplevel):
         self.on_select = on_select
         self.filtered: list[LutEntry] = []
         self.row_entries: dict[str, LutEntry] = {}
-        self.title("LUT 库 — 按设备筛选")
+        self.title(f"{title} — 按设备筛选")
         self.geometry("900x620")
         self.minsize(720, 480)
         self.configure(fg_color=BG)
@@ -53,11 +56,10 @@ class LutLibraryDialog(ctk.CTkToplevel):
         header.grid(row=0, column=0, sticky="ew", padx=20, pady=(18, 8))
         header.grid_columnconfigure(0, weight=1)
         ctk.CTkLabel(
-            header, text="DJI LUT 库", font=FONT_DIALOG_TITLE, text_color=TEXT,
+            header, text=title, font=FONT_DIALOG_TITLE, text_color=TEXT,
         ).grid(row=0, column=0, sticky="w")
         ctk.CTkLabel(
-            header, text="滚动查看 / 搜索 / 按设备筛选，双击可直接使用",
-            font=FONT_BODY, text_color=MUTED,
+            header, text=subtitle, font=FONT_BODY, text_color=MUTED,
         ).grid(row=1, column=0, sticky="w", pady=(2, 0))
         self.count_label = ctk.CTkLabel(
             header, text="", font=FONT_BODY_BOLD, text_color=ACCENT,
@@ -175,8 +177,10 @@ class LutLibraryDialog(ctk.CTkToplevel):
     def _build_filter_values(self) -> None:
         devices = sorted({e.device for e in self.entries}, key=str.casefold)
         categories = sorted({e.category for e in self.entries}, key=str.casefold)
+        origins = sorted({e.origin for e in self.entries}, key=str.casefold)
         self.device_menu.configure(values=["全部设备"] + devices)
         self.category_menu.configure(values=["全部类别"] + categories)
+        self.source_menu.configure(values=["全部来源"] + origins)
 
     def _reset_filters(self) -> None:
         self.device_var.set("全部设备")

@@ -36,6 +36,8 @@ ASSET_SUFFIX = ".zip"
 USER_AGENT = f"DJI-DLogM-BatchGrader/{__version__}"
 UPDATE_REQUEST_FILE = UPDATES_DIR / "update_request.json"
 UPDATER_EXE_NAME = "DJI_Updater.exe"
+UPDATE_SUMMARY_START = "<!-- UPDATE_SUMMARY_START -->"
+UPDATE_SUMMARY_END = "<!-- UPDATE_SUMMARY_END -->"
 
 
 class UpdateError(RuntimeError):
@@ -122,6 +124,41 @@ def check_for_update(timeout: int = 10) -> UpdateInfo | None:
         asset_size=int(asset.get("size") or 0),
         page_url=str(data.get("html_url") or GITHUB_RELEASES_URL),
     )
+
+def extract_update_summary(notes: str, *, max_lines: int = 8, max_chars: int = 700) -> str:
+    """Return only the concise change summary for the update prompt.
+
+    Release bodies may contain full release notes for the GitHub page. The
+    desktop prompt should show a short, change-focused excerpt instead.
+    """
+    newline = chr(10)
+    text = str(notes or "").replace(chr(13) + newline, newline).strip()
+    if not text:
+        return ""
+    if UPDATE_SUMMARY_START in text and UPDATE_SUMMARY_END in text:
+        text = text.split(UPDATE_SUMMARY_START, 1)[1].split(UPDATE_SUMMARY_END, 1)[0]
+    else:
+        lines = [line.rstrip() for line in text.splitlines()]
+        bullets = [line for line in lines if line.lstrip().startswith(("- ", "* "))]
+        if bullets:
+            text = newline.join(bullets[:max_lines])
+        else:
+            text = newline.join(line for line in lines if line.strip())
+    result_lines = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if len(line) > 180:
+            line = line[:180].rstrip() + "…"
+        result_lines.append(line)
+        if len(result_lines) >= max_lines:
+            break
+    result = newline.join(result_lines).strip()
+    if len(result) > max_chars:
+        result = result[:max_chars].rstrip() + "…"
+    return result
+
 
 def write_update_request(info: UpdateInfo) -> Path:
     """Persist update metadata for the independent updater process."""

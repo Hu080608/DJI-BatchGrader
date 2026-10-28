@@ -18,6 +18,7 @@ from dlog_grader.encoders import choose_encoder  # noqa: E402
 from dlog_grader.ffmpeg_tools import build_video_command  # noqa: E402
 from dlog_grader.formats import OUTPUT_PROFILES, QUALITY_PRESETS, get_output_profile  # noqa: E402
 from dlog_grader.jobs import JOB_STATUS_LABELS, JOB_STATUS_ORDER, JobRecord, QueueStore, format_duration_hms  # noqa: E402
+from dlog_grader.updater import extract_update_summary  # noqa: E402
 from dlog_grader.lut import CubeLUT  # noqa: E402
 from dlog_grader.lut_library import scan_lut_library  # noqa: E402
 from dlog_grader._license_guard import LicenseError, LicenseManager, canonical_payload  # noqa: E402
@@ -87,6 +88,18 @@ class CoreTests(unittest.TestCase):
         self.assertIn("-map_metadata", cmd)
         self.assertIn("copy", cmd)
         self.assertIn("bt709", cmd)
+
+    def test_update_summary_is_short(self):
+        notes = (
+            "<!-- UPDATE_SUMMARY_START -->" + chr(10)
+            + "- 修复 A" + chr(10) + "- 新增 B" + chr(10)
+            + "<!-- UPDATE_SUMMARY_END -->" + chr(10)
+            + "## 完整发布说明" + chr(10) + "这里是很长的大段内容。"
+        )
+        summary = extract_update_summary(notes)
+        self.assertIn("修复 A", summary)
+        self.assertIn("新增 B", summary)
+        self.assertNotIn("完整发布说明", summary)
 
     def test_queue_clear_state_roundtrip(self):
         work = PROJECT_ROOT / "temp" / "queue_clear_unit"

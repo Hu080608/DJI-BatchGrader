@@ -1,7 +1,7 @@
 # DJI D-Log M Batch Grader
 
 **作者：Hu080608**  
-**版本：3.6.0**  
+**版本：3.6.1**  
 **平台：Windows 10/11 x64**  
 **许可：商业软件，买断授权**
 
@@ -67,7 +67,7 @@ https://github.com/Hu080608/DJI-BatchGrader/releases
 下载最新的：
 
 ```text
-DJI_DLogM_BatchGrader_Windows_x64_v3.6.0.zip
+DJI_DLogM_BatchGrader_Windows_x64_v3.6.1.zip
 ```
 
 ### 2. 解压并启动
@@ -111,7 +111,7 @@ DJI_DLogM_BatchGrader.exe
 1. **导入素材**：把照片、视频或文件夹拖入左上角拖拽区域，或点击“选择文件夹”（JPG/PNG/TIFF、HEIC、RAW、MP4/MOV/M4V）。
 2. **选择处理范围**：默认“全部处理”；也可选择“只处理视频”或“处理视频 + RAW”。范围外的普通照片会被跳过并计数，不会中断批处理。
 3. **选择输出目录**：默认输出到软件目录下的 `output\`。
-4. **选择 LUT**：点击“浏览 LUT 库”；默认库按设备/类别分组，也可以导入自己的 `.cube`。
+4. **选择 LUT**：点击“浏览官方LUT库”“浏览网络热门LUT库”或“浏览自定义LUT库”；各入口按设备/风格分组，也可以导入自己的 `.cube`。
 5. **选择输出格式**：按交付需求选择 H.264、HEVC 8-bit、HEVC 10-bit 或 ProRes。
 6. **开始处理**：点击“开始批处理”；右侧任务队列会显示每个文件的进度、编码器、耗时和错误信息。
 7. **查看结果**：任务完成后打开输出目录；报告位于 `reports\`，界面和日志会显示本次处理总耗时。

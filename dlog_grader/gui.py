@@ -34,7 +34,7 @@ from .processor import (
     BatchProcessor, BatchResult, is_file_in_scope, normalize_scope,
 )
 from .watcher import FolderWatcher
-from .updater import check_for_update, launch_updater
+from .updater import check_for_update, extract_update_summary, launch_updater
 
 # Palette
 BG = "#080f1c"
@@ -415,17 +415,30 @@ class GraderGUI:
             text_color=OK, anchor="w", justify="left", wraplength=545,
         )
         self.lut_status_label.grid(row=1, column=0, sticky="ew", padx=16)
-        ctk.CTkLabel(
+        self.lut_meta_label = ctk.CTkLabel(
             card, textvariable=self.lut_meta_var, font=FONT_SMALL,
-            text_color=MUTED, anchor="w", justify="left", wraplength=560,
-        ).grid(row=2, column=0, sticky="ew", padx=16, pady=(2, 0))
+            text_color=MUTED, anchor="w", justify="left", wraplength=540,
+        )
+        self.lut_meta_label.grid(row=2, column=0, sticky="ew", padx=16, pady=(2, 0))
+
+        browse_buttons = ctk.CTkFrame(card, fg_color="transparent")
+        browse_buttons.grid(row=3, column=0, sticky="ew", padx=12, pady=(7, 0))
+        for index in range(3):
+            browse_buttons.grid_columnconfigure(index, weight=1)
+        browse_specs = (
+            ("浏览官方LUT库", "official", FONT_SMALL_BOLD, ACCENT_DARK, "#0f766e"),
+            ("浏览网络热门LUT库", "network", FONT_SMALL, "#1b2b46", "#284261"),
+            ("浏览自定义LUT库", "custom", FONT_SMALL, "#1b2b46", "#284261"),
+        )
+        for index, (label, mode, font, color, hover) in enumerate(browse_specs):
+            ctk.CTkButton(
+                browse_buttons, text=label, width=1, height=30, corner_radius=9,
+                fg_color=color, hover_color=hover, text_color=TEXT,
+                font=font, command=lambda value=mode: self._open_lut_library(value),
+            ).grid(row=0, column=index, sticky="ew", padx=3)
+
         buttons = ctk.CTkFrame(card, fg_color="transparent")
-        buttons.grid(row=3, column=0, sticky="w", padx=14, pady=(7, 8))
-        ctk.CTkButton(
-            buttons, text="浏览 LUT 库", width=112, height=30, corner_radius=9,
-            fg_color=ACCENT_DARK, hover_color="#0f766e", text_color=TEXT,
-            font=FONT_SMALL_BOLD, command=self._open_lut_library,
-        ).pack(side="left")
+        buttons.grid(row=4, column=0, sticky="w", padx=14, pady=(7, 8))
         ctk.CTkButton(
             buttons, text="导入 .cube", width=92, height=30, corner_radius=9,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
@@ -830,7 +843,7 @@ DJI D-Log M Batch Grader 使用说明
 一、最快开始（4 步）
 1. 把照片、视频或整个文件夹拖到左上拖拽区域。
 2. 选择输出文件夹（默认软件目录下 output/）。
-3. 在“3D LUT”区域点击“浏览 LUT 库”，选择设备与风格；默认 Air 3S。
+3. 在“3D LUT”区域点击“浏览官方LUT库”“浏览网络热门LUT库”或“浏览自定义LUT库”，选择设备与风格；默认 Air 3S。
 4. 选择输出格式，点击“开始批处理”。
 
 二、支持的输入
@@ -854,7 +867,7 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
 默认 LUT 库内置 83 个 3D LUT：55 个 DJI 官方 LUT（25 个设备/系列）和 28 个“热门网络 LUT”风格。
 程序默认每 24 小时检查一次 DJI 官方目录，发现新机型/LUT 会自动下载补充；
 也可以点击“同步 LUT 库”手动检查。
-点击“浏览 LUT 库”可按来源、设备、类别筛选并支持鼠标滚轮。
+三个浏览按钮分别打开官方、热门网络和自定义 LUT 分区，均支持按设备、类别筛选和鼠标滚轮。
 来源统一分为“默认”和“自定义”；“热门网络 LUT”属于默认内置分区，只有用户导入的 LUT 归为“自定义”。
 也可以点击“导入 .cube”加载自己的 LUT。
 
@@ -1723,7 +1736,7 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
         else:
             self.lut_status_var.set(
                 f"[{tag}] 未找到：{selected.name}\n"
-                f"路径：{selected}" + chr(10) + "可点击“浏览 LUT 库”或“导入 .cube”重新选择"
+                f"路径：{selected}" + chr(10) + "可点击“浏览官方LUT库”“浏览网络热门LUT库”或“导入 .cube”重新选择"
             )
             self.lut_status_label.configure(text_color=DANGER)
 
@@ -1740,7 +1753,8 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
         match = next((entry for entry in entries if entry.path.resolve() == current), None)
         if match:
             if match.origin == "默认":
-                self.lut_meta_var.set("【默认】DJI官方LUT")
+                self.lut_meta_var.set("")
+                self.lut_meta_label.grid_remove()
             else:
                 detail = f"[{match.origin}] {match.device} / {match.category}"
                 if match.profile:
@@ -1748,8 +1762,10 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
                 if match.description:
                     detail += f" · {match.description}"
                 self.lut_meta_var.set(detail)
+                self.lut_meta_label.grid()
         elif current.exists():
             self.lut_meta_var.set("自定义 LUT（未在 manifest 中登记）")
+            self.lut_meta_label.grid()
         else:
             self.lut_meta_var.set("LUT 文件不存在，请重新选择。")
 
@@ -1778,15 +1794,36 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
         self._lut_update_thread = threading.Thread(target=_worker, daemon=True)
         self._lut_update_thread.start()
 
-    def _open_lut_library(self) -> None:
+    def _open_lut_library(self, mode: str = "official") -> None:
         if not self.lut_entries:
             self._refresh_lut_library()
+        entries = list(self.lut_entries.values())
+        if mode == "official":
+            entries = [e for e in entries if e.origin == "默认" and e.device != "热门网络 LUT"]
+            title = "DJI 官方 LUT 库"
+            subtitle = "按 DJI 设备 / 类别筛选官方 LUT"
+        elif mode == "network":
+            entries = [e for e in entries if e.device == "热门网络 LUT"]
+            title = "热门网络 LUT 库"
+            subtitle = "按电影感、胶片风、日系、赛博朋克等风格筛选"
+        elif mode == "custom":
+            entries = [e for e in entries if e.origin == "自定义"]
+            title = "自定义 LUT 库"
+            subtitle = "用户导入或放置在 luts/custom/ 下的 LUT"
+        else:
+            title = "LUT 库"
+            subtitle = "滚动查看 / 搜索 / 按设备筛选，双击可直接使用"
+        if not entries:
+            messagebox.showinfo(title, "当前分区没有可用的 LUT。")
+            return
         current = project_path(self.lut_path_var.get())
         LutLibraryDialog(
             self.root,
-            list(self.lut_entries.values()),
+            entries,
             current,
             self._apply_lut_entry,
+            title=title,
+            subtitle=subtitle,
         )
 
     def _confirm_lut(self, candidate: LutCandidate) -> bool:
@@ -1890,7 +1927,7 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
             messagebox.showerror(
                 "LUT 错误",
                 f"当前选择的 LUT 不存在：\n{selected_lut}\n\n"
-                "请点击“浏览 LUT 库”或“导入 .cube”重新选择。",
+                "请点击“浏览官方LUT库”“浏览网络热门LUT库”或“导入 .cube”重新选择。",
             )
             return
         try:
@@ -2055,12 +2092,10 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
                         else:
                             self._append_log("INFO", f"GitHub Releases 检查完成，当前 v{__version__} 已是最新。")
                     else:
-                        notes = str(info.notes or "").strip()
-                        if len(notes) > 900:
-                            notes = notes[:900] + "…"
+                        notes = extract_update_summary(str(info.notes or ""))
                         text = "发现新版本 v" + str(info.version) + "。" + chr(10) * 2
                         if notes:
-                            text += notes + chr(10) * 2
+                            text += "本次更新：" + chr(10) + notes + chr(10) * 2
                         text += "是否进入独立更新进度页并安装？"
                         if messagebox.askyesno("发现新版本", text):
                             self._download_update(info)

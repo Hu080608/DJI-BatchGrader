@@ -16,14 +16,14 @@ https://github.com/Hu080608/DJI-BatchGrader/releases
 每次发布使用一个版本标签，例如：
 
 ```text
-v3.6.0
+v3.6.1
 ```
 
 发布资产必须包含：
 
 ```text
-DJI_DLogM_BatchGrader_Windows_x64_v3.6.0.zip
-DJI_DLogM_BatchGrader_Windows_x64_v3.6.0.zip.sha256
+DJI_DLogM_BatchGrader_Windows_x64_v3.6.1.zip
+DJI_DLogM_BatchGrader_Windows_x64_v3.6.1.zip.sha256
 ```
 
 - ZIP 内根目录必须是 `DJI_DLogM_BatchGrader/`
@@ -81,7 +81,7 @@ DJI_DLogM_BatchGrader_Windows_x64_v3.6.0.zip.sha256
 ## 本地打包脚本
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools\package_release.ps1 -Version v3.6.0
+powershell -ExecutionPolicy Bypass -File tools\package_release.ps1 -Version v3.6.1
 ```
 
 脚本会从 `dist\DJI_DLogM_BatchGrader` 生成 ZIP 和 `.sha256` 到 `release\`。公开 GitHub 仓库不包含源码，发布包由本地受控构建上传。
