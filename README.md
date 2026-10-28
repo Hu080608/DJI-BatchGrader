@@ -1,7 +1,7 @@
 # DJI D-Log M Batch Grader
 
 **作者：Hu080608**  
-**版本：3.7.0**  
+**版本：3.7.1**  
 **平台：Windows 10/11 x64**  
 **许可：商业软件，买断授权**
 
@@ -67,7 +67,7 @@ https://github.com/Hu080608/DJI-BatchGrader/releases
 下载最新的：
 
 ```text
-DJI_DLogM_BatchGrader_Windows_x64_v3.7.0.zip
+DJI_DLogM_BatchGrader_Windows_x64_v3.7.1.zip
 ```
 
 ### 2. 解压并启动

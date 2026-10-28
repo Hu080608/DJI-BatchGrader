@@ -1,7 +1,7 @@
 # DJI D-Log M Batch Grader — Windows GUI EXE
 
 **作者：Hu080608**  
-**版本：3.7.0**  
+**版本：3.7.1**  
 **许可：商业软件，购买后授权使用**  
 **仅 Windows 10/11 x64 GUI 版本，无 CLI**
 

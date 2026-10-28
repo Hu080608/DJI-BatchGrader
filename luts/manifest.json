@@ -727,14 +727,14 @@
       "category": "电影感",
       "name": "80s 电影胶片",
       "description": "80s 电影胶片：夜景、霓虹、复古叙事、城市街拍。暖黄高光、轻微褪色；避免高光过曝。",
-      "sha256": "a1ea705adf57084812cd56fda7dc89eb7a210160a0b9dfa990b6215d33d6d82a",
+      "sha256": "ef2f7a8bc28f07fd770ba3bafa416fd2c3119b44a328ba7a563b9b568a43fc11",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Cinema%20Through%20The%20Ages/Striped%20Purple%20-%201980_s.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/赛博朋克/DLogM_Cyberpunk_ArcadeDayz_StripedPurple.cube",
@@ -743,14 +743,14 @@
       "category": "赛博朋克",
       "name": "街机霓虹",
       "description": "街机霓虹：夜景、霓虹、游戏/音乐视频。蓝紫霓虹较强，肤色会偏冷。",
-      "sha256": "9b320558c5a2302995f9716a70a524d029adfb49d6e3b08646840c23b010a03b",
+      "sha256": "3a15cb90e2d868fa6bf2710269c24e8d34c4be3c721f72dddabc1dc694eda602",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Arcade%20Dayz.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/复古暖调/DLogM_Retro_AmberHaze_StripedPurple.cube",
@@ -759,14 +759,14 @@
       "category": "复古暖调",
       "name": "琥珀薄雾",
       "description": "琥珀薄雾：黄昏、室内暖光、人像。暖调明显，天空可能偏黄。",
-      "sha256": "dbae3dd9885c3416456ca0ac958837033d58cf2ecbc97d5bba56874c4cffc763",
+      "sha256": "a2ab577aa358931c8d4f8cce6d36380cc342c9688b30ac5496a9ea7fb5ac7ece",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Amber%20Haze.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/复古暖调/DLogM_Retro_CaramelPlumCake_StripedPurple.cube",
@@ -775,14 +775,14 @@
       "category": "复古暖调",
       "name": "焦糖梅子",
       "description": "焦糖梅子：咖啡店、室内、复古街拍。洋红与焦糖交织，注意肤色保护。",
-      "sha256": "5259baadb39063ad29ef1ae18f970e506934d37a22cc9391fef47759e1c18a23",
+      "sha256": "93e075ba481324f0e2ab2efe6709c26e001eca89cbb1179b839d56877ec77146",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Caramel%20Plum%20Cake.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/复古暖调/DLogM_Retro_PolaroidMintCream_StripedPurple.cube",
@@ -791,14 +791,14 @@
       "category": "复古暖调",
       "name": "宝丽来薄荷奶油",
       "description": "宝丽来薄荷奶油：日常记录、旅行、人像。低对比、薄荷绿高光。",
-      "sha256": "6f0967cbc003009ee71ba6474b42214d1c1b3456ad9fccbdaca7288959582f07",
+      "sha256": "b789dc52cd5b3afeb1ce951466fea1414c047ae76836c33627d0b76787149187",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Polaroid%20Mint%20Cream.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/赛博朋克/DLogM_Cyberpunk_WoelfellyNeon_StripedPurple.cube",
@@ -807,14 +807,14 @@
       "category": "赛博朋克",
       "name": "狼霓虹",
       "description": "狼霓虹：夜景、赛博朋克、霓虹招牌。高饱和蓝紫，建议降低曝光。",
-      "sha256": "261360769f69860996435d8202d2001cd5bf041e9389e918154c267bb8048998",
+      "sha256": "f77f333f471c96298313121c5809d7ee15fda77b4740caddf09f4d419396cbe6",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Woelfelly%20Neon.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/复古暖调/DLogM_Retro_Horchata_StripedPurple.cube",
@@ -823,14 +823,14 @@
       "category": "复古暖调",
       "name": "欧洽塔奶油",
       "description": "欧洽塔奶油：室内、美食、暖光人像。奶油高光、暖棕阴影。",
-      "sha256": "a2b3472055a901241c599fd725474cb8ff895b852a4bdaeaaaa50cf70a78dc5e",
+      "sha256": "10d883907ae6b2dc935b314f225569eda96a9a0434c66a261fd4e0a051cc7ed6",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Drink%20it%20in%21/Striped%20Purple%20-%20Horchata.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/日系清新/DLogM_Japanese_VanillaBean_StripedPurple.cube",
@@ -839,14 +839,14 @@
       "category": "日系清新",
       "name": "香草豆",
       "description": "香草豆：日系日常、旅行、人像。柔和低对比、轻微暖色。",
-      "sha256": "c7ca0a124d5481291d4e3b0a0c444f1a68241a16e66d2166abc24fb36b3e0267",
+      "sha256": "e27a8bdf8e5fd7ce40ea5d21b574ca31c13525506df385a3328b552aea2ac993",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Drink%20it%20in%21/Striped%20Purple%20-%20Vanilla%20Bean.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/日系清新/DLogM_Japanese_SpringWater_StripedPurple.cube",
@@ -855,14 +855,14 @@
       "category": "日系清新",
       "name": "春水",
       "description": "春水：日系街拍、清新风景、阴天。清淡青蓝、低饱和。",
-      "sha256": "2eeda47fc998089aa101c782748af45348ce79a486631442f7d49aa546bb19b8",
+      "sha256": "a19f63d564bce8c35f1fb2f786ac2e30d38361623a9fa33cc560acd870468562",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20Spring%20Water.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/日系清新/DLogM_Japanese_PhillyFog_StripedPurple.cube",
@@ -871,14 +871,14 @@
       "category": "日系清新",
       "name": "费城雾",
       "description": "费城雾：雾天、城市、阴天。灰蓝低对比，注意肤色。",
-      "sha256": "4885b40cf570d0b1b69764f80acb32dc087616d6f957d972a61686fab38dfc6f",
+      "sha256": "7e0bf6415f0840373f08c0be918f69255e5cbac4a3a232b69c5f85ae8631b920",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20Philly%20Fog.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/日系清新/DLogM_Japanese_EmeraldMalaise_StripedPurple.cube",
@@ -887,14 +887,14 @@
       "category": "日系清新",
       "name": "祖母绿忧郁",
       "description": "祖母绿忧郁：森林、雨天、日系人像。绿色偏青，避免绿植过饱和。",
-      "sha256": "1a66d1afafda3446c24841fb5166dd3ce6890263c21af276e8560a4ceb45106f",
+      "sha256": "2cea0fc7e01ee0de187ac9c874efe7a78f273455940b2d31d070744656210123",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20Emerald%20Malaise.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/自然风光/DLogM_Nature_DecemberGreens_StripedPurple.cube",
@@ -903,14 +903,14 @@
       "category": "自然风光",
       "name": "十二月绿",
       "description": "十二月绿：森林、山川、户外。针叶绿和冷高光。",
-      "sha256": "bc782cb5153f5628a9bdcd481783021836f9703e76670c8f6f5feef4b6afe26b",
+      "sha256": "54d8e21b8fede4b78218a8eaef92dbbf66508e253a5e7a7b99c970ce22a74adb",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20December%20Greens.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/自然风光/DLogM_Nature_SeaTurtle_StripedPurple.cube",
@@ -919,14 +919,14 @@
       "category": "自然风光",
       "name": "海龟",
       "description": "海龟：海岛、水下、自然纪录片。青绿蓝调，适合大面积自然色。",
-      "sha256": "2f01f6b63e12e4a6d6f56de5686fcf6b79b5fdba085aa7ad82e98104d8080552",
+      "sha256": "10606ff907fb9105cb5eeb80d75522f2ea7478d00c566798d8fadb425efe3143",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20Sea%20Turtle.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/冷调夜景/DLogM_Cool_TealEmbers_StripedPurple.cube",
@@ -935,14 +935,14 @@
       "category": "冷调夜景",
       "name": "青蓝余烬",
       "description": "青蓝余烬：夜景、城市、情绪片。青蓝阴影、暖高光。",
-      "sha256": "f8874465e94a551ffba7cabb9cf377531fa472af2fed3f43b5938b301260634d",
+      "sha256": "a9d419cf9d214984732d145abc8b7d3f97f9e1802f89fa991218c29c2c7482f1",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20Teal%20Embers.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/冷调夜景/DLogM_Cool_SnowyBlues_StripedPurple.cube",
@@ -951,14 +951,14 @@
       "category": "冷调夜景",
       "name": "雪蓝",
       "description": "雪蓝：雪景、冬日、清晨。冷白高光、蓝阴影。",
-      "sha256": "6bf6d336a1993adecfafb312f5e2179a5163ea82c43b2a9e56a47456e7e9b075",
+      "sha256": "4b2de57a1d4c9060bff956b3c8506874ee0583df65973b167096b72a2b0ea4a9",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20Snowy%20Blues.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/冷调夜景/DLogM_Cool_GreyMatter_StripedPurple.cube",
@@ -967,14 +967,14 @@
       "category": "冷调夜景",
       "name": "灰质",
       "description": "灰质：工业、城市、纪实。低饱和灰蓝。",
-      "sha256": "d4f3d20b56c0d59e11998fa367a3d9465c8e23bb31be17183c12d42f86076752",
+      "sha256": "b541ded89bcc1f4e37c72eae7ca262c297d595f5b9c334903706c58c5b62130b",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/MISC/Striped%20Purple%20-%20Grey%20Matter.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_LomochromePurple_StripedPurple.cube",
@@ -983,14 +983,14 @@
       "category": "胶片风",
       "name": "Lomochrome 紫",
       "description": "Lomochrome 紫：实验胶片、花草、街拍。紫绿偏移明显，不适合标准肤色。",
-      "sha256": "bc3cb0ee60c43b64870ab30f7cacab00f11be2159cdde668b40016128ba5a81c",
+      "sha256": "b9b7859c15e23aee984717de5e38df7e0a2f224715a27c492da0014c41e2242b",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Film%20Simulations/Lomography/Lomochrome%20Purple.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/实验风格/DLogM_Experimental_Infrared_StripedPurple.cube",
@@ -999,14 +999,14 @@
       "category": "实验风格",
       "name": "红外胶片",
       "description": "红外胶片：实验、艺术、植物。红/洋红偏移，谨慎用于人像。",
-      "sha256": "9a36c093222fe4813cdf9666ecee9b5f20839f24d9dea4635a6f118d051dc708",
+      "sha256": "1264fbbcc38a8c817746d2b2dd6b4156157fd758f9a4876d6c2f9d8e95721b01",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Film%20Simulations/Infrared/Striped%20Purple%20-%20Infrared.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/电影感/DLogM_Cinematic_Kraken_StripedPurple.cube",
@@ -1015,14 +1015,14 @@
       "category": "电影感",
       "name": "海妖",
       "description": "海妖：深海、夜景、情绪片。深青黑位。",
-      "sha256": "7e9d5324651046694507b33d4ece6bf553868ff8b5dd5b560a1ee93b406290b5",
+      "sha256": "ae421b16921be5c434c56774efd8aceaa5042e5df6b970dcadc1d6817b453d61",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Zoology/Striped%20Purple%20-%20Kraken.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/复古暖调/DLogM_Retro_Tiger_StripedPurple.cube",
@@ -1031,14 +1031,14 @@
       "category": "复古暖调",
       "name": "虎纹",
       "description": "虎纹：沙漠、日落、户外。暖橙高饱和。",
-      "sha256": "312dc9f7d8b60193947ed9379b0f46ce3815ce2a456c5471d24690d3a9dd2efd",
+      "sha256": "c9f3f10a3ffc0a863b6c82b0090e4402c6d46938f9401bae0044bee88ac1025c",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Zoology/Striped%20Purple%20-%20Tiger.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/电影感/DLogM_Cinematic_TealOrange_AICinema.cube",
@@ -1047,14 +1047,14 @@
       "category": "电影感",
       "name": "青橙大片",
       "description": "青橙大片：商业片、旅拍、人物。标准青橙，肤色偏暖。",
-      "sha256": "78bd957c4b9d3191475b5f9f2f2110c8e9f3cd6660b568ffc90027926cd2b231",
+      "sha256": "b19a4c7be8c15c22f6a381a4c18d5784397569f14c0be7a60a2f8792e18ece33",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/creative/teal_orange_blockbuster.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_BleachBypass_AICinema.cube",
@@ -1063,14 +1063,14 @@
       "category": "胶片风",
       "name": "漂白旁路",
       "description": "漂白旁路：战争、工业、硬朗人像。高对比、低饱和。",
-      "sha256": "d9d928387597b19cd5ea47750e9daf5dabd96afd695efaa8238f6a149e1c5dad",
+      "sha256": "618dd27fc9a4a2fd260d20f3fb1270992f881d370e44b82006159bdfc1775e39",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/creative/bleach_bypass.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_FadedAged_AICinema.cube",
@@ -1079,14 +1079,14 @@
       "category": "胶片风",
       "name": "褪色老电影",
       "description": "褪色老电影：回忆、旧时光、家庭影像。低对比、褪色。",
-      "sha256": "024728b52aa3aacec1256425513d5b6c7841092880e78abdf120b89df4670c0e",
+      "sha256": "9dca2a54e1f438a57aa704c9871321480247906adfa2c69fbb2eb86ad9d1e722",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/creative/faded_film_aged.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/实验风格/DLogM_Experimental_CrossProcess_AICinema.cube",
@@ -1095,14 +1095,14 @@
       "category": "实验风格",
       "name": "交叉冲洗",
       "description": "交叉冲洗：时尚、实验、音乐视频。青绿阴影与暖高光。",
-      "sha256": "4db733ddb7ae3168832cec90590d90f02b1bc6e2e928aacabaf85b8f9739114c",
+      "sha256": "2f39022b9a987773246ffb9816b7ed61cb724713d0d675d0e1bb3740dbf075ad",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/creative/cross_process.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_KodakVision3_250D_AICinema.cube",
@@ -1111,14 +1111,14 @@
       "category": "胶片风",
       "name": "Kodak Vision3 250D",
       "description": "Kodak Vision3 250D：日光、人像、纪录片。电影负片色。",
-      "sha256": "23820ca279c66e757ee5cde6294ac41a09d9379757da4456c245568832061092",
+      "sha256": "715562587f6cb17637b1cb7bd3c30a59c5856b35d8ecf9c7ad53fe298b50583c",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/kodak_vision3_250d.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_FujiEterna250D_AICinema.cube",
@@ -1127,14 +1127,14 @@
       "category": "胶片风",
       "name": "Fuji Eterna 250D",
       "description": "Fuji Eterna 250D：日系电影、室内、人像。低饱和柔和。",
-      "sha256": "cd771a8a0a0c4684ca381031965301a48fb1411e2920daac9c93c6c04e96bf69",
+      "sha256": "05125a869741154812f29e8a8f0ed4843ceb26aa4a91d9d679423462aa3ccdfd",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/fuji_eterna_250d.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_KodakEktachrome100D_AICinema.cube",
@@ -1143,14 +1143,14 @@
       "category": "胶片风",
       "name": "Kodak Ektachrome 100D",
       "description": "Kodak Ektachrome 100D：日光、风光、商业。反转片高饱和。",
-      "sha256": "b89623693e732e34c63bac76b7f7ddbd6604cb329e1c423a8ed09f7b8350373d",
+      "sha256": "c55806225239e03db659bc542fdb2250ecd901c50422e424b2805cdb3d1d854d",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/kodak_ektachrome_100d.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/复古暖调/DLogM_Retro_Super8HomeMovie_AICinema.cube",
@@ -1159,14 +1159,14 @@
       "category": "复古暖调",
       "name": "Super 8 家庭电影",
       "description": "Super 8 家庭电影：复古回忆、旅行、家庭。暖黄、低对比、轻微颗粒感。",
-      "sha256": "a287df92cb492c34c7bdbb76e3ecd493022b37ec8b93063d03b41b559a5e0d6b",
+      "sha256": "ba4bd4e6007b0cf2a840a17ceba5075668359ae882ffd5fac962ac97978f8fe6",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/super_8mm_home_movie.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/电影感/DLogM_Cinematic_1920sFilm_StripedPurple.cube",
@@ -1175,14 +1175,14 @@
       "category": "电影感",
       "name": "1920s 电影胶片",
       "description": "1920s 电影胶片：年代片、黑白转彩色、复古叙事。偏暖棕与低饱和，适合复古质感。",
-      "sha256": "3c993db101541e8c860a0ac5d1030c500ea31f29b1f6317231a33ffcffd0cca9",
+      "sha256": "fb4a7dc3d2d9ac5e549aa6db68765d79b544608a6aadeef1382b6e2b5047fa2f",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Cinema%20Through%20The%20Ages/Striped%20Purple%20-%201920s.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/电影感/DLogM_Cinematic_1950sFilm_StripedPurple.cube",
@@ -1191,14 +1191,14 @@
       "category": "电影感",
       "name": "1950s 彩色电影",
       "description": "1950s 彩色电影：年代片、复古广告、怀旧街拍。暖黄高光、柔和反差。",
-      "sha256": "4fccf2c2644e5b0d617266d562b4cabd91149be0e2710744790786b0f33465e6",
+      "sha256": "e9c8a06e5dbae51c719d2169fb6f18c409d3e5b27bef6783a6bd99dde1e92cfb",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Cinema%20Through%20The%20Ages/Striped%20Purple%20-%201950s.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/电影感/DLogM_Cinematic_1970sFilm_StripedPurple.cube",
@@ -1207,14 +1207,14 @@
       "category": "电影感",
       "name": "1970s 胶片电影",
       "description": "1970s 胶片电影：复古电影、公路片、怀旧纪实。偏暖绿、低对比、胶片褪色感。",
-      "sha256": "a21f62a399fbc17accc4ec8a9f173b8125f0ff7e46e29d4d220bbc8f75d120c6",
+      "sha256": "41c9b21f6e5a08587ce12b9d5ecc2d6e08da4a5cd08a9da41b48d1ca8a6f9f9b",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Cinema%20Through%20The%20Ages/Striped%20Purple%20-%201970s.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/电影感/DLogM_Cinematic_DesaturatedMoody_AICinema.cube",
@@ -1223,14 +1223,14 @@
       "category": "电影感",
       "name": "低饱和情绪片",
       "description": "低饱和情绪片：城市、阴天、情绪叙事。低饱和冷调，人物肤色偏稳。",
-      "sha256": "e62237863f60e88bcfa836abe32aa3b8d8a4faafc24c4210667f909c4bd160da",
+      "sha256": "4749bcb272d9039aef66238d5c68c3c8d6e8078fe1c04f88cf3583926beb9a89",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/creative/desaturated_moody.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/电影感/DLogM_Cinematic_WarmShadowSplit_AICinema.cube",
@@ -1239,14 +1239,14 @@
       "category": "电影感",
       "name": "暖阴影分离调",
       "description": "暖阴影分离调：人像、夜景、室内。暖阴影、冷高光，适合肤色。",
-      "sha256": "d17d3f9159800a879050badddb944751174da1a845f43b9a14a48623973769bf",
+      "sha256": "02541c843f47e489f241b734033f16a74e7a9f35ea2bf169f17c4cbecb9b7ce5",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/creative/split_tone_warm_shadows.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_ArichaBlend_StripedPurple.cube",
@@ -1255,14 +1255,14 @@
       "category": "胶片风",
       "name": "Aricha 混合胶片",
       "description": "Aricha 混合胶片：咖啡、室内、复古街拍。暖棕胶片色，低饱和。",
-      "sha256": "0c321ae1eb30f250de89033ef1a278b7fe4ef2331eab32d028f63ad3eb54572a",
+      "sha256": "d2cb60b8007e60db3d5d80f7bdf064b1a93fe2d45ba6930bb44f0a05ca62f4b0",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Drink%20it%20in%21/Striped%20Purple%20-%20Aricha%20Blend.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_IrishUprising_StripedPurple.cube",
@@ -1271,14 +1271,14 @@
       "category": "胶片风",
       "name": "爱尔兰起义",
       "description": "爱尔兰起义：户外、草地、阴天。绿色偏青、胶片低对比。",
-      "sha256": "f2026840cab39cd008064b175552b469c664888cbe39f8a74eb96f1ad552e13c",
+      "sha256": "ce848e714c44f433adfd6869eaad2c073385faac61563e20e7a50dadb62b63b6",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20Irish%20Uprising.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_KodakVision3_500T_AICinema.cube",
@@ -1287,14 +1287,14 @@
       "category": "胶片风",
       "name": "Kodak Vision3 500T",
       "description": "Kodak Vision3 500T：夜景、室内、钨丝灯。高感负片色，暗部偏青。",
-      "sha256": "425d057a6b76cd9ce2d3efa0a3d9703a1b7e6b3eeae1bdb9484d75e4093ad341",
+      "sha256": "4b536e4f0cc5724424df2f2879eafe8bbeda9727535925f5881d62188e951448",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/kodak_vision3_500t.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_FujiEternaVivid500_AICinema.cube",
@@ -1303,14 +1303,14 @@
       "category": "胶片风",
       "name": "Fuji Eterna Vivid 500",
       "description": "Fuji Eterna Vivid 500：日系电影、夜景、人像。比 Eterna 更鲜艳，适合晚上。",
-      "sha256": "cc3abf7ea0e4d71f65b1e33463c8c88073e22338753856b552eb701268332487",
+      "sha256": "49308e68a0c1f4baf6d75954a3b37011aeced60d3dc3e76a5b7c8b68f440bffb",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/fuji_eterna_vivid_500.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_16mmReversal_AICinema.cube",
@@ -1319,14 +1319,14 @@
       "category": "胶片风",
       "name": "16mm 反转片",
       "description": "16mm 反转片：复古纪录、旅行、实验。高对比、轻微偏色。",
-      "sha256": "040da4dde7dfbd7cc97a81d76bccd038e328e5d1010de08342f221187bb6e105",
+      "sha256": "65cc7e0fac3bcd9f22a45da25e5804abb36c36f1d0064beb100ae2b2ed6a008c",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/16mm_reversal_vintage.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/胶片风/DLogM_Film_Technicolor3Strip_AICinema.cube",
@@ -1335,14 +1335,14 @@
       "category": "胶片风",
       "name": "Technicolor 三色",
       "description": "Technicolor 三色：复古大片、红绿蓝强色场景。高饱和、强色彩分离。",
-      "sha256": "9543f33d7112cb959cba3488005393643082842c06361fc312da68ac823287d0",
+      "sha256": "d1221860e526a84a07fea018aaa926a6da2db8b4b8e78e3d2de99c8f61c6bd9f",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/technicolor_3strip.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/日系清新/DLogM_Japanese_BlueLagoon_StripedPurple.cube",
@@ -1351,14 +1351,14 @@
       "category": "日系清新",
       "name": "蓝泻湖",
       "description": "蓝泻湖：海边、夏日、清新旅拍。清透蓝绿、低对比。",
-      "sha256": "141963fef9925fc4ba26ad2c078b4a1bb5b8b46ff6c3f088cab0e006122073e0",
+      "sha256": "79270e370f44b32479aabe735625e26e486963375d8d334fbfd217c912391c7d",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Drink%20it%20in%21/Striped%20Purple%20-%20Blue%20Lagoon.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/日系清新/DLogM_Japanese_Turquoise_StripedPurple.cube",
@@ -1367,14 +1367,14 @@
       "category": "日系清新",
       "name": "绿松石",
       "description": "绿松石：海边、泳池、夏日人像。青绿色高光，肤色偏冷。",
-      "sha256": "4e657e2c2ddf1be854e2072e8e232771b8ea3458274cbfdedeb673868ef232d1",
+      "sha256": "c2d986cb5f5fb9cd8e0633c29a59611559399ca76bf5758241c4f1c422aa1f4b",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Turquoise.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/赛博朋克/DLogM_Cyberpunk_CherryChampagne_StripedPurple.cube",
@@ -1383,14 +1383,14 @@
       "category": "赛博朋克",
       "name": "樱桃香槟",
       "description": "樱桃香槟：夜景、派对、霓虹人像。洋红/樱桃色高光，适合霓虹。",
-      "sha256": "77c76dc915628d282e4487633c15a35e88dfb5bab6a43b505f87a00cd8f87e32",
+      "sha256": "73f5e4d8b852b401643ceaef1001b46c0a5c8de5f252e358559e12bc96320675",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Cherry%20Champagne.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/赛博朋克/DLogM_Cyberpunk_SugarPlums_StripedPurple.cube",
@@ -1399,14 +1399,14 @@
       "category": "赛博朋克",
       "name": "糖梅紫",
       "description": "糖梅紫：夜景、音乐视频、时尚。紫粉阴影，高饱和。",
-      "sha256": "b4ae61fbbf9733df3a39e4b7acb0fb825049c0fa439d8608815cf7305b4f9c75",
+      "sha256": "32fffce5469ca1ecb7911b1ef600e3b73fa1d70f753327d419f7c745451fe272",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Sugar%20Plums.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/复古暖调/DLogM_Retro_Pendleton_StripedPurple.cube",
@@ -1415,14 +1415,14 @@
       "category": "复古暖调",
       "name": "Pendleton 复古",
       "description": "Pendleton 复古：户外、露营、复古生活。暖橙与灰绿交织。",
-      "sha256": "958c8b982fe70f4a442d93974d00d24a070f4a1fcb861620073c501dffaab376",
+      "sha256": "562c111719293c050938cafff1129a5d9c283a67a2b623359f5046c5b4e4a4c3",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Pendleton.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/复古暖调/DLogM_Retro_Lobster_StripedPurple.cube",
@@ -1431,14 +1431,14 @@
       "category": "复古暖调",
       "name": "龙虾红",
       "description": "龙虾红：美食、夜市、暖光人像。红色饱和度高，注意肤色。",
-      "sha256": "c3cd48bf1aa7f4d0908075bc251d14903407c50cfc9f1bbd0885f2d78616b759",
+      "sha256": "c7812663331df5f2fc2768bf8c8fb830b87e9d9f8924921f054818e5d1fd6115",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Zoology/Striped%20Purple%20-%20Lobster.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/自然风光/DLogM_Nature_TealSupreme_StripedPurple.cube",
@@ -1447,14 +1447,14 @@
       "category": "自然风光",
       "name": "青绿至上",
       "description": "青绿至上：森林、湖泊、航拍。青绿突出，适合大面积自然景。",
-      "sha256": "e3f0bba365cdf8096fe56d6ae2930540c6e8d401337ca73f92b39e182633283a",
+      "sha256": "7b5a600c12498ff6e8efb4b2f77b28fadbd27e828f4751cef59d5f1bd549396b",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Scenic%20Moods/Striped%20Purple%20-%20Teal%20Supreme.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/自然风光/DLogM_Nature_Ara_StripedPurple.cube",
@@ -1463,14 +1463,14 @@
       "category": "自然风光",
       "name": "金刚鹦鹉",
       "description": "金刚鹦鹉：雨林、花卉、热带。高饱和红绿蓝，适合生态。",
-      "sha256": "18ce0d8a227f42d948e37a1364111d4978f6fd7a98b7fec6a016a948c7d11fdd",
+      "sha256": "7808004cf82f92f3f3908c9c2c4ccc2430270553280faac5d676bff6083a1437",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Zoology/Striped%20Purple%20-%20Ara.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/自然风光/DLogM_Nature_Boa_StripedPurple.cube",
@@ -1479,14 +1479,14 @@
       "category": "自然风光",
       "name": "蟒蛇",
       "description": "蟒蛇：丛林、湿地、暗调自然。深绿与暖棕。",
-      "sha256": "09c6eeec6449e937436ad45886fea0a45429f69886f0f0ffe151f22dd8d70b61",
+      "sha256": "8b9d370bbe1ecb1a56a99f5c2db5e579ca5c2600f3a9c2f31e937d839e29f1aa",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Zoology/Striped%20Purple%20-%20Boa.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/自然风光/DLogM_Nature_Dodo_StripedPurple.cube",
@@ -1495,14 +1495,14 @@
       "category": "自然风光",
       "name": "渡渡鸟",
       "description": "渡渡鸟：海岛、沙滩、旅行。暖沙色与柔和蓝。",
-      "sha256": "71336aeefb844369ae9533c2221258a8a4f500d8044057cacf309ed74f896ca8",
+      "sha256": "4129abad230ab90a4ab8388f5643c1ed17a2b4c0b1473388316c2cc0741a57ac",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Zoology/Striped%20Purple%20-%20Dodo.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/冷调夜景/DLogM_Cool_GreatAuk_StripedPurple.cube",
@@ -1511,14 +1511,14 @@
       "category": "冷调夜景",
       "name": "大海雀",
       "description": "大海雀：海岸、阴天、冷色纪实。冷灰蓝、低饱和。",
-      "sha256": "26b34693144681ce3957efb943d84641590ddfb4d8f2d5c8329022782c8bbf4f",
+      "sha256": "b6e43ada0b6b37354c9131f582f16a2387e8310c3ec84b7ffdc815c06b49c2ac",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Zoology/Striped%20Purple%20-%20Great%20Auk.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/自然风光/DLogM_Nature_Moa_StripedPurple.cube",
@@ -1527,14 +1527,14 @@
       "category": "自然风光",
       "name": "恐鸟",
       "description": "恐鸟：森林、山地、自然纪录。深绿暖棕、沉稳。",
-      "sha256": "f6cf25390735c228396f0aba3bf3d028578df43eb88f20ab09c49525cfe88dbe",
+      "sha256": "42c14a1178274af5e822a6eaa9ee8fe30e7e6da89d4861ab5e06046a3f2213e0",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Zoology/Striped%20Purple%20-%20Moa.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/实验风格/DLogM_Experimental_BlowMeDown_StripedPurple.cube",
@@ -1543,14 +1543,14 @@
       "category": "实验风格",
       "name": "风吹草动",
       "description": "风吹草动：实验短片、音乐视频、时尚。偏色与反差较强，注意肤色。",
-      "sha256": "18c2f244b86b96f948cb219c3e56cdebc5cbaa4dd9c1c85f6c67317bb619703e",
+      "sha256": "14548e5ac9ba58043c1b53d0b4392bab1a34a184af176413814b26cdf903d21d",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Blow%20Me%20Down.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/实验风格/DLogM_Experimental_VeggieCrisps_StripedPurple.cube",
@@ -1559,14 +1559,14 @@
       "category": "实验风格",
       "name": "蔬菜脆片",
       "description": "蔬菜脆片：实验、创意、色彩测试。黄绿偏色，适合非写实场景。",
-      "sha256": "73b76215846c503413d140cab2763c50c6a62c4ef2cc21fe6e267aab492818ef",
+      "sha256": "47c006112dfb36210aeff2fd39614ecd785b130f09ac85d3adcd3f34062e0065",
       "source_url": "https://github.com/stripedpurple/color-grading-luts/blob/master/Avant%20Garde/Striped%20Purple%20-%20Veggie%20Crisps.cube",
       "source_page": "https://github.com/stripedpurple/color-grading-luts",
       "source_author": "Nixua / Striped Purple",
       "source_collection": "Striped Purple LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/StripedPurple-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/冷调夜景/DLogM_Cool_DayForNight_AICinema.cube",
@@ -1575,14 +1575,14 @@
       "category": "冷调夜景",
       "name": "日转夜",
       "description": "日转夜：白天拍夜景、城市、情绪片。压暗并偏蓝，需适当提高曝光。",
-      "sha256": "a1eb57e536f77c6acd04ca1d687d78b4fb0bbfe53f92087822f2a2c249243970",
+      "sha256": "f9bee5e01f390ace5a5a62d1fac81f0148bb348c3c8300a07493d0042bdfb1fa",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/creative/day_for_night.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/黑白纪实/DLogM_BW_HighContrast_AICinema.cube",
@@ -1591,14 +1591,14 @@
       "category": "黑白纪实",
       "name": "高反差黑白",
       "description": "高反差黑白：街头、建筑、硬光人像。黑白高反差，适合硬朗纪实。",
-      "sha256": "4880c14da4d71d204937101286d0a9b8072b8493322a736f7f0f9e5055838df5",
+      "sha256": "4f2cba5db62422f19f5931169426bb9613e263cc11da780212fac2492bcd4277",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/creative/high_contrast_bw.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/黑白纪实/DLogM_BW_KodakDoubleX_AICinema.cube",
@@ -1607,14 +1607,14 @@
       "category": "黑白纪实",
       "name": "Kodak Double-X 黑白",
       "description": "Kodak Double-X 黑白：街头、人像、纪实。经典黑白负片，层次丰富。",
-      "sha256": "6a9c76189a8c8d704f71c358373ff9b5f9708352e66aac6e745492489e4cb10f",
+      "sha256": "d4edfba0028ab23ecff083bcc060aca48f315bbb2fb186455b7a1558ff437222",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/kodak_doublex_5222_bw.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/黑白纪实/DLogM_BW_KodakTriX400_AICinema.cube",
@@ -1623,14 +1623,14 @@
       "category": "黑白纪实",
       "name": "Kodak Tri-X 400 黑白",
       "description": "Kodak Tri-X 400 黑白：街拍、新闻、低光纪实。粗颗粒、高反差黑白。",
-      "sha256": "e2a5ee7b6625f04522cfa982c93492ebea177b5de1049c78d5f5fce37dc21ca6",
+      "sha256": "57f5a65d45edd9f0e282cbac63d7c00f06ab20c112dc378d77341337c7c5995a",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/kodak_trix_400_bw.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     },
     {
       "file": "热门网络 LUT/黑白纪实/DLogM_BW_IlfordHP5_AICinema.cube",
@@ -1639,14 +1639,14 @@
       "category": "黑白纪实",
       "name": "Ilford HP5 黑白",
       "description": "Ilford HP5 黑白：人像、街头、室内。宽容度高的黑白，适合人像。",
-      "sha256": "0e93d9e2a9c22ab0792551af4b5cf5aad4d1515b7862607007eff0fdcb30174b",
+      "sha256": "b7285003228307cb6527a67ba18207660c8333e64d1923ff27a211a74720fe42",
       "source_url": "https://github.com/poptechstudio/ai-cinema-studio-engine/blob/main/luts/film_stocks/ilford_hp5_bw.cube",
       "source_page": "https://github.com/poptechstudio/ai-cinema-studio-engine",
       "source_author": "PopTech Studio LLC",
       "source_collection": "AI Cinema Studio Engine LUT Collection",
       "license": "MIT",
       "license_file": "热门网络 LUT/THIRD_PARTY_LICENSES/AI_Cinema_Studio_Engine-MIT.txt",
-      "generated": "D-Log M composite, 17^3"
+      "generated": "D-Log M composite, 33^3"
     }
   ],
   "ignored_source_urls": [

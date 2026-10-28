@@ -1,10 +1,16 @@
-# DJI D-Log M Batch Grader v3.7.0
+# DJI D-Log M Batch Grader v3.7.1
 
 <!-- UPDATE_SUMMARY_START -->
-- 新增 30 个热门网络风格 LUT，网络分区累计 58 个。
-- 网络 LUT 统一为 17³ 网格，LUT 资源体积明显缩小。
-- 更新成功后自动清理 updates，仅保留当前版本和最多 1 个上一版本包。
+- 网络 LUT 恢复为 33³ 网格，提升渐变和肤色过渡精度。
+- LUT 总数与分类保持不变：全库 113 个，网络分区 58 个。
 <!-- UPDATE_SUMMARY_END -->
+
+## LUT 网格恢复
+
+- 网络 LUT 从 17³ 恢复为 33³ 网格。
+- 保留 58 个网络风格 LUT 及 113 个总 LUT 数量。
+- 本次恢复会提高 LUT 调色精度，发布包体积会相应增加。
+- 原有 DJI 官方 LUT、目录结构和调用路径不变。
 
 ## 网络热门 LUT 扩容
 
@@ -13,10 +19,10 @@
 - 新增电影感年代片、胶片负片、日系、赛博朋克、自然风光和实验风格条目。
 - 所有新增条目均写入 `manifest.json`，包含风格、场景、来源 URL、MIT 许可和 SHA-256。
 
-## LUT 体积优化
+## LUT 网格与体积
 
-- 网络 LUT 统一输出为 17³ 网格。
-- 网络 LUT 资源目录由约 27 MB 降至约 7.8 MB。
+- 网络 LUT 统一输出为 33³ 网格。
+- 相比 17³ 版本，色彩过渡精度更高，LUT 资源体积更大。
 - 原有 DJI 官方 LUT 不重新编码、不改名、不改变调用路径。
 
 ## updates 清理策略
@@ -137,8 +143,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.7.0.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.7.0.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.7.1.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.7.1.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 

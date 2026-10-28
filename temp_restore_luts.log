@@ -1,0 +1,92 @@
+built 热门网络 LUT/电影感/DLogM_Cinematic_80sFilm_StripedPurple.cube
+built 热门网络 LUT/赛博朋克/DLogM_Cyberpunk_ArcadeDayz_StripedPurple.cube
+built 热门网络 LUT/复古暖调/DLogM_Retro_AmberHaze_StripedPurple.cube
+built 热门网络 LUT/复古暖调/DLogM_Retro_CaramelPlumCake_StripedPurple.cube
+built 热门网络 LUT/复古暖调/DLogM_Retro_PolaroidMintCream_StripedPurple.cube
+built 热门网络 LUT/赛博朋克/DLogM_Cyberpunk_WoelfellyNeon_StripedPurple.cube
+built 热门网络 LUT/复古暖调/DLogM_Retro_Horchata_StripedPurple.cube
+built 热门网络 LUT/日系清新/DLogM_Japanese_VanillaBean_StripedPurple.cube
+built 热门网络 LUT/日系清新/DLogM_Japanese_SpringWater_StripedPurple.cube
+built 热门网络 LUT/日系清新/DLogM_Japanese_PhillyFog_StripedPurple.cube
+built 热门网络 LUT/日系清新/DLogM_Japanese_EmeraldMalaise_StripedPurple.cube
+built 热门网络 LUT/自然风光/DLogM_Nature_DecemberGreens_StripedPurple.cube
+built 热门网络 LUT/自然风光/DLogM_Nature_SeaTurtle_StripedPurple.cube
+built 热门网络 LUT/冷调夜景/DLogM_Cool_TealEmbers_StripedPurple.cube
+built 热门网络 LUT/冷调夜景/DLogM_Cool_SnowyBlues_StripedPurple.cube
+built 热门网络 LUT/冷调夜景/DLogM_Cool_GreyMatter_StripedPurple.cube
+built 热门网络 LUT/胶片风/DLogM_Film_LomochromePurple_StripedPurple.cube
+built 热门网络 LUT/实验风格/DLogM_Experimental_Infrared_StripedPurple.cube
+built 热门网络 LUT/电影感/DLogM_Cinematic_Kraken_StripedPurple.cube
+Traceback (most recent call last):
+  File "D:\Python\Lib\urllib\request.py", line 1318, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\http\client.py", line 1386, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\http\client.py", line 1432, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\http\client.py", line 1381, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\http\client.py", line 1141, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "D:\Python\Lib\http\client.py", line 1085, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "D:\Python\Lib\http\client.py", line 1527, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+                ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+                                          server_hostname=server_hostname)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Python\Lib\ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "D:\Python\Lib\ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ds_workplace\DJI_DLogM_BatchGrader\tools\build_network_luts.py", line 428, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "D:\ds_workplace\DJI_DLogM_BatchGrader\tools\build_network_luts.py", line 370, in main
+    source_file = fetch(look.source, look.source_path)
+  File "D:\ds_workplace\DJI_DLogM_BatchGrader\tools\build_network_luts.py", line 255, in fetch
+    out.write_bytes(urllib.request.urlopen(url, timeout=90).read())
+                    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "D:\Python\Lib\urllib\request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "D:\Python\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "D:\Python\Lib\urllib\request.py", line 1366, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python\Lib\urllib\request.py", line 1321, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)>

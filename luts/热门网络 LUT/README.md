@@ -11,7 +11,7 @@ DJI Air 3S D-Log M -> Rec.709 基准 LUT
         ↓
 公开风格 LUT（MIT）
         ↓
-17^3 D-Log M 复合 LUT
+33^3 D-Log M 复合 LUT
 ```
 
 因此这些文件可以直接在软件中作为单个 LUT 使用，不需要先手动还原 Rec.709。
@@ -114,5 +114,5 @@ DJI Air 3S D-Log M -> Rec.709 基准 LUT
 python toolsuild_network_luts.py
 ```
 
-脚本会下载 MIT 源 LUT 到 `temp/`，应用 DJI D-Log M 基准变换后重新生成 17^3 `.cube`，
+脚本会下载 MIT 源 LUT 到 `temp/`，应用 DJI D-Log M 基准变换后重新生成 33^3 `.cube`，
 并更新 `luts/manifest.json`、`SOURCES.md` 和本说明。

@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import shutil
 import sys
+import time
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
@@ -29,7 +30,7 @@ BASE_LUT = ROOT / "luts" / "DJI Air 3S" / "Normalization" / "DJI Air 3s DJI D-Lo
 TARGET_ROOT = ROOT / "luts" / "热门网络 LUT"
 SOURCE_CACHE = ROOT / "temp" / "network_luts_src"
 MANIFEST = ROOT / "luts" / "manifest.json"
-GRID = 17
+GRID = 33
 
 SOURCE_REPOS = {
     "stripedpurple": {
@@ -250,10 +251,23 @@ def source_url(source: str, source_path: str) -> str:
 def fetch(source: str, source_path: str) -> Path:
     SOURCE_CACHE.mkdir(parents=True, exist_ok=True)
     out = SOURCE_CACHE / (source + "__" + Path(source_path).name)
-    if not out.exists():
-        url = SOURCE_REPOS[source]["raw"] + urllib.parse.quote(source_path)
-        out.write_bytes(urllib.request.urlopen(url, timeout=90).read())
-    return out
+    if out.exists() and out.stat().st_size > 1000:
+        return out
+    out.unlink(missing_ok=True)
+    url = SOURCE_REPOS[source]["raw"] + urllib.parse.quote(source_path)
+    last_error: Exception | None = None
+    for attempt in range(6):
+        try:
+            with urllib.request.urlopen(url, timeout=90) as response:
+                payload = response.read()
+            if len(payload) < 1000:
+                raise RuntimeError("downloaded file is too small")
+            out.write_bytes(payload)
+            return out
+        except Exception as exc:
+            last_error = exc
+            time.sleep(2 + attempt * 2)
+    raise RuntimeError(f"下载失败：{source_path}：{last_error}")
 
 
 def build_grid() -> np.ndarray:
@@ -297,7 +311,7 @@ def write_docs(entries: list[dict]) -> None:
         "        ↓",
         "公开风格 LUT（MIT）",
         "        ↓",
-        "17^3 D-Log M 复合 LUT",
+        "33^3 D-Log M 复合 LUT",
         "```",
         "",
         "因此这些文件可以直接在软件中作为单个 LUT 使用，不需要先手动还原 Rec.709。",
@@ -323,7 +337,7 @@ def write_docs(entries: list[dict]) -> None:
         "python tools\build_network_luts.py",
         "```",
         "",
-        "脚本会下载 MIT 源 LUT 到 `temp/`，应用 DJI D-Log M 基准变换后重新生成 17^3 `.cube`，",
+        "脚本会下载 MIT 源 LUT 到 `temp/`，应用 DJI D-Log M 基准变换后重新生成 33^3 `.cube`，",
         "并更新 `luts/manifest.json`、`SOURCES.md` 和本说明。",
         "",
     ])
@@ -398,7 +412,7 @@ def main() -> int:
             "source_collection": source_meta["label"],
             "license": source_meta["license"],
             "license_file": "热门网络 LUT/" + source_meta["license_file"],
-            "generated": "D-Log M composite, 17^3",
+            "generated": "D-Log M composite, 33^3",
         })
         print("built", rel)
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
