@@ -426,15 +426,15 @@ class GraderGUI:
         for index in range(3):
             browse_buttons.grid_columnconfigure(index, weight=1)
         browse_specs = (
-            ("浏览官方LUT库", "official", FONT_SMALL_BOLD, ACCENT_DARK, "#0f766e"),
-            ("浏览网络热门LUT库", "network", FONT_SMALL, "#1b2b46", "#284261"),
-            ("浏览自定义LUT库", "custom", FONT_SMALL, "#1b2b46", "#284261"),
+            ("浏览官方LUT库", "official"),
+            ("浏览网络热门LUT库", "network"),
+            ("浏览自定义LUT库", "custom"),
         )
-        for index, (label, mode, font, color, hover) in enumerate(browse_specs):
+        for index, (label, mode) in enumerate(browse_specs):
             ctk.CTkButton(
                 browse_buttons, text=label, width=1, height=30, corner_radius=9,
-                fg_color=color, hover_color=hover, text_color=TEXT,
-                font=font, command=lambda value=mode: self._open_lut_library(value),
+                fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
+                font=FONT_SMALL, command=lambda value=mode: self._open_lut_library(value),
             ).grid(row=0, column=index, sticky="ew", padx=3)
 
         buttons = ctk.CTkFrame(card, fg_color="transparent")
@@ -446,7 +446,7 @@ class GraderGUI:
         
                 font=FONT_SMALL,).pack(side="left", padx=7)
         ctk.CTkButton(
-            buttons, text="同步 LUT 库", width=98, height=30, corner_radius=9,
+            buttons, text="同步DJI官方LUT库", width=140, height=30, corner_radius=9,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
             command=self._update_lut_library,
         
@@ -866,7 +866,7 @@ ProRes 422 HQ MOV 10-bit：剪辑母版。
 五、LUT 库
 默认 LUT 库内置 83 个 3D LUT：55 个 DJI 官方 LUT（25 个设备/系列）和 28 个“热门网络 LUT”风格。
 程序默认每 24 小时检查一次 DJI 官方目录，发现新机型/LUT 会自动下载补充；
-也可以点击“同步 LUT 库”手动检查。
+也可以点击“同步DJI官方LUT库”手动检查。
 三个浏览按钮分别打开官方、热门网络和自定义 LUT 分区，均支持按设备、类别筛选和鼠标滚轮。
 来源统一分为“默认”和“自定义”；“热门网络 LUT”属于默认内置分区，只有用户导入的 LUT 归为“自定义”。
 也可以点击“导入 .cube”加载自己的 LUT。

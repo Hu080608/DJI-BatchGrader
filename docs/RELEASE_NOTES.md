@@ -1,16 +1,16 @@
-# DJI D-Log M Batch Grader v3.6.1
+# DJI D-Log M Batch Grader v3.6.2
 
 <!-- UPDATE_SUMMARY_START -->
-- “3D LUT”区拆分为官方、热门网络、自定义三个独立浏览入口。
-- 删除默认 LUT 下方的冗余说明文字。
-- 更新提示只显示本次变更摘要，不再显示整段发布说明。
+- 三个 LUT 浏览按钮统一为同一种按钮颜色。
+- “同步 LUT 库”更名为“同步DJI官方LUT库”。
 <!-- UPDATE_SUMMARY_END -->
 
 ## 界面调整
 
-- “3D LUT”区新增三个按钮：浏览官方LUT库、浏览网络热门LUT库、浏览自定义LUT库。
+- “3D LUT”区新增三个按钮：浏览官方LUT库、浏览网络热门LUT库、浏览自定义LUT库，三个按钮使用统一颜色。
 - 三个入口分别只显示对应分区的 LUT，减少筛选步骤。
 - 默认 LUT 下方不再显示“【默认】DJI 官方LUT”的重复说明。
+- “同步 LUT 库”按钮更名为“同步DJI官方LUT库”。
 - 更新提示改为读取发布说明中的“更新摘要”，仅显示变化内容。
 
 ## 热门网络 LUT 分区
@@ -115,8 +115,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.6.1.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.6.1.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.6.2.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.6.2.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 
