@@ -48,3 +48,5 @@ dist_nuitka/
 test_media/bench/
 test_media/input/sample_blackmagic.dng
 build_updater/
+
+temp_*.log
