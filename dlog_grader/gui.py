@@ -267,9 +267,9 @@ class GraderGUI:
         if hasattr(self, "browse_lut_button"):
             self.browse_lut_button.configure(state="normal")
         if hasattr(self, "import_lut_button"):
-            self.import_lut_button.configure(state="disabled" if official else "normal")
+            self.import_lut_button.configure(state="normal")
         if hasattr(self, "sync_lut_button"):
-            self.sync_lut_button.configure(state="normal" if official else "disabled")
+            self.sync_lut_button.configure(state="normal")
 
     def _build_ui(self) -> None:
         self.root.grid_columnconfigure(0, weight=1)
@@ -358,8 +358,9 @@ class GraderGUI:
         self._build_output_card(scroll)
         self._build_lut_card(scroll)
         self._build_settings_card(scroll)
-        self._build_actions(scroll, row=4)
-        self._build_progress_card(scroll, row=5)
+        self._build_aux_card(scroll)
+        self._build_actions(scroll, row=5)
+        self._build_progress_card(scroll, row=6)
         self._build_log_panel(right)
         self._apply_mode_visibility()
         self.root.bind("<Control-z>", lambda _event: self._undo_lut())
@@ -515,22 +516,21 @@ class GraderGUI:
         )
         self.lut_meta_label.grid(row=3, column=0, sticky="ew", padx=16, pady=(2, 0))
 
+        buttons = ctk.CTkFrame(card, fg_color="transparent")
+        buttons.grid(row=4, column=0, sticky="w", padx=10, pady=(7, 8))
         self.browse_lut_button = ctk.CTkButton(
-            card, text="浏览LUT库", height=34, corner_radius=9,
+            buttons, text="浏览/选择LUT", width=118, height=30, corner_radius=9,
             fg_color=ACCENT_DARK, hover_color="#0f766e", text_color=TEXT,
             font=FONT_SMALL_BOLD, command=self._open_lut_library,
         )
-        self.browse_lut_button.grid(row=4, column=0, sticky="ew", padx=16, pady=(7, 0))
+        self.browse_lut_button.pack(side="left", padx=(4, 7))
         self.browse_buttons = {"all": self.browse_lut_button}
-
-        buttons = ctk.CTkFrame(card, fg_color="transparent")
-        buttons.grid(row=5, column=0, sticky="w", padx=14, pady=(7, 8))
         self.import_lut_button = ctk.CTkButton(
             buttons, text="导入 .cube", width=92, height=30, corner_radius=9,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
             command=self._choose_lut, font=FONT_SMALL,
         )
-        self.import_lut_button.pack(side="left", padx=7)
+        self.import_lut_button.pack(side="left", padx=0)
         self.sync_lut_button = ctk.CTkButton(
             buttons, text="同步DJI官方LUT库", width=140, height=30, corner_radius=9,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
@@ -546,7 +546,7 @@ class GraderGUI:
 
         strength_row = ctk.CTkFrame(card, fg_color="transparent")
         self.strength_row = strength_row
-        strength_row.grid(row=6, column=0, sticky="ew", padx=16, pady=(0, 8))
+        strength_row.grid(row=5, column=0, sticky="ew", padx=16, pady=(0, 8))
         strength_row.grid_columnconfigure(1, weight=1)
         ctk.CTkLabel(
             strength_row, text="风格强度", font=FONT_SMALL_BOLD,
@@ -570,7 +570,7 @@ class GraderGUI:
     def _build_quick_card(self, parent) -> None:
         card = ctk.CTkFrame(parent, fg_color="transparent")
         self.quick_card = card
-        card.grid(row=7, column=0, sticky="ew", padx=0, pady=(0, 2))
+        card.grid(row=6, column=0, sticky="ew", padx=0, pady=(0, 2))
         card.grid_columnconfigure(0, weight=1)
         head = ctk.CTkFrame(card, fg_color="transparent")
         head.grid(row=0, column=0, sticky="ew", padx=16, pady=(8, 2))
@@ -589,12 +589,12 @@ class GraderGUI:
             font=FONT_SMALL, command=self._open_preview_dialog,
         ).grid(row=0, column=2, sticky="e", padx=(6, 0))
         ctk.CTkButton(
-            head, text="撤销", width=54, height=28, corner_radius=8,
+            head, text="撤销调色", width=74, height=28, corner_radius=8,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
             font=FONT_SMALL, command=self._undo_lut,
         ).grid(row=0, column=3, sticky="e", padx=(6, 0))
         ctk.CTkButton(
-            head, text="重做", width=54, height=28, corner_radius=8,
+            head, text="重做调色", width=74, height=28, corner_radius=8,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
             font=FONT_SMALL, command=self._redo_lut,
         ).grid(row=0, column=4, sticky="e", padx=(6, 0))
@@ -880,31 +880,36 @@ class GraderGUI:
             font=FONT_SMALL,
         ).grid(row=0, column=5, sticky="e")
 
-        row4 = ctk.CTkFrame(card, fg_color="transparent")
-        row4.grid(row=5, column=0, sticky="ew", padx=16, pady=(4, 9))
-        row4.grid_columnconfigure(0, weight=1)
-        row4.grid_columnconfigure(1, weight=1)
+    def _build_aux_card(self, parent) -> None:
+        card = self._card(parent)
+        self.aux_card = card
+        card.grid(row=4, column=0, sticky="ew", pady=(0, 9))
+        card.grid_columnconfigure(0, weight=1)
+        card.grid_columnconfigure(1, weight=1)
+        ctk.CTkLabel(
+            card, text="常用开关", font=FONT_SECTION, text_color=TEXT,
+        ).grid(row=0, column=0, columnspan=2, sticky="w", padx=16, pady=(8, 2))
         ctk.CTkSwitch(
-            row4, text="监听输入文件夹", variable=self.watch_var,
+            card, text="监听输入文件夹", variable=self.watch_var,
             font=FONT_BODY, text_color=TEXT, progress_color=ACCENT_DARK,
             button_color=ACCENT, button_hover_color="#5eead4",
             command=self._on_watch_toggle,
-        ).grid(row=0, column=0, sticky="w", pady=(1, 3))
+        ).grid(row=1, column=0, sticky="w", padx=16, pady=3)
         ctk.CTkSwitch(
-            row4, text="匿名诊断", variable=self.telemetry_var,
+            card, text="匿名诊断", variable=self.telemetry_var,
             font=FONT_BODY, text_color=TEXT, progress_color=ACCENT_DARK,
             button_color=ACCENT, button_hover_color="#5eead4",
-        ).grid(row=0, column=1, sticky="w", pady=(1, 3))
+        ).grid(row=1, column=1, sticky="w", padx=16, pady=3)
         ctk.CTkSwitch(
-            row4, text="启动时检查更新", variable=self.auto_update_var,
+            card, text="启动时检查更新", variable=self.auto_update_var,
             font=FONT_BODY, text_color=TEXT, progress_color=ACCENT_DARK,
             button_color=ACCENT, button_hover_color="#5eead4",
-        ).grid(row=1, column=0, sticky="w", pady=(1, 0))
+        ).grid(row=2, column=0, sticky="w", padx=16, pady=(3, 8))
         ctk.CTkSwitch(
-            row4, text="自动同步 LUT", variable=self.auto_lut_update_var,
+            card, text="自动同步 LUT", variable=self.auto_lut_update_var,
             font=FONT_BODY, text_color=TEXT, progress_color=ACCENT_DARK,
             button_color=ACCENT, button_hover_color="#5eead4",
-        ).grid(row=1, column=1, sticky="w", pady=(1, 0))
+        ).grid(row=2, column=1, sticky="w", padx=16, pady=(3, 8))
 
     def _build_actions(self, parent, row: int = 4) -> None:
         actions = ctk.CTkFrame(parent, fg_color="transparent")

@@ -1,10 +1,17 @@
-# DJI D-Log M Batch Grader v3.8.2
+# DJI D-Log M Batch Grader v3.8.3
 
 <!-- UPDATE_SUMMARY_START -->
-- 三个 LUT 浏览按钮合并为一个“浏览LUT库”，进入后按来源和类别筛选。
-- “色彩还原 / 调色”改为大按钮并移到卡片下方。
-- 调色模式新增动态对比预览，支持默认样片、队列素材、图片和视频。
+- “常用开关”在简易模式也常驻显示：监听输入、匿名诊断、启动检查更新、自动同步 LUT。
+- “撤销/重做”改名为“撤销调色/重做调色”。
+- “浏览/选择LUT”移到“导入 .cube”前；“同步DJI官方LUT库”始终可用。
 <!-- UPDATE_SUMMARY_END -->
+
+## 简易模式与按钮调整
+
+- 常用开关从专业设置中拆出，简易模式与专业模式均显示。
+- “撤销”“重做”按钮改为“撤销调色”“重做调色”。
+- “浏览/选择LUT”移动到“导入 .cube”前。
+- “同步DJI官方LUT库”不再随模式置灰，任何模式下都可点击。
 
 ## 色彩管理交互调整
 
@@ -175,8 +182,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.8.2.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.8.2.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.8.3.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.8.3.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 
