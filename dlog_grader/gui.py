@@ -194,7 +194,6 @@ class GraderGUI:
         )
         self.simple_mode = self.ui_mode_var.get() == "简易模式"
         self._lut_history: list[tuple[str, int]] = []
-        self._lut_future: list[tuple[str, int]] = []
         self._strength_before: tuple[str, int] | None = None
         self._restoring_lut = False
         self.watch_var = tk.BooleanVar(value=bool(self.config.watch_enabled))
@@ -364,7 +363,6 @@ class GraderGUI:
         self._build_progress_card(right, row=2)
         self._apply_mode_visibility()
         self.root.bind("<Control-z>", lambda _event: self._undo_lut())
-        self.root.bind("<Control-y>", lambda _event: self._redo_lut())
 
     def _build_source_card(self, parent) -> None:
         card = self._card(parent)
@@ -589,15 +587,10 @@ class GraderGUI:
             font=FONT_SMALL, command=self._open_preview_dialog,
         ).grid(row=0, column=2, sticky="e", padx=(6, 0))
         ctk.CTkButton(
-            head, text="撤销调色", width=74, height=28, corner_radius=8,
+            head, text="撤销上一步", width=94, height=28, corner_radius=8,
             fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
             font=FONT_SMALL, command=self._undo_lut,
         ).grid(row=0, column=3, sticky="e", padx=(6, 0))
-        ctk.CTkButton(
-            head, text="重做调色", width=74, height=28, corner_radius=8,
-            fg_color="#1b2b46", hover_color="#284261", text_color=TEXT,
-            font=FONT_SMALL, command=self._redo_lut,
-        ).grid(row=0, column=4, sticky="e", padx=(6, 0))
         ctk.CTkLabel(
             card, textvariable=self.template_status_var, font=FONT_SMALL,
             text_color=MUTED, anchor="w", justify="left", wraplength=540,
@@ -645,7 +638,6 @@ class GraderGUI:
             return
         self._lut_history.append(current)
         self._lut_history = self._lut_history[-50:]
-        self._lut_future.clear()
 
     def _restore_lut_state(self, state: tuple[str, int]) -> None:
         path, strength = state
@@ -668,21 +660,9 @@ class GraderGUI:
         if not self._lut_history:
             self.status_var.set("没有可撤销的调色操作")
             return
-        current = self._current_lut_state()
         state = self._lut_history.pop()
-        self._lut_future.append(current)
         self._restore_lut_state(state)
-        self.status_var.set("已撤销上一次调色操作")
-
-    def _redo_lut(self) -> None:
-        if not self._lut_future:
-            self.status_var.set("没有可重做的调色操作")
-            return
-        current = self._current_lut_state()
-        state = self._lut_future.pop()
-        self._lut_history.append(current)
-        self._restore_lut_state(state)
-        self.status_var.set("已重做调色操作")
+        self.status_var.set("已撤销上一步调色操作")
 
     def _on_strength_change(self, value) -> None:
         amount = int(round(float(value)))
@@ -701,7 +681,6 @@ class GraderGUI:
         if before != self._current_lut_state():
             self._lut_history.append(before)
             self._lut_history = self._lut_history[-50:]
-            self._lut_future.clear()
 
     def _apply_template(self, template: StyleTemplate) -> None:
         if not template.path.exists():

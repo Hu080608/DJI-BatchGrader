@@ -1,10 +1,17 @@
-# DJI D-Log M Batch Grader v3.8.4
+# DJI D-Log M Batch Grader v3.8.5
 
 <!-- UPDATE_SUMMARY_START -->
-- 开始批处理、取消、打开输出目录和进度区移动到右侧底部。
-- 左侧只保留素材、色彩管理、处理设置和常用开关。
-- 启动按钮和进度反馈与任务队列同区显示。
+- 删除“撤销调色 / 重做调色”两个按钮及其重做功能。
+- 改为单个“撤销上一步”按钮。
+- 保留最近 50 步调色历史，可连续撤销。
 <!-- UPDATE_SUMMARY_END -->
+
+## 撤销功能简化
+
+- 快速调色区域只保留一个“撤销上一步”按钮。
+- 删除“重做调色”按钮和重做逻辑。
+- 保留撤销历史，可连续点击撤销上一步。
+- `Ctrl+Z` 仍可撤销上一步。
 
 ## 右侧底部操作区
 
@@ -189,8 +196,8 @@
 - 应用更新唯一来源：GitHub Releases。
 - 发布资产：
   ```text
-  DJI_DLogM_BatchGrader_Windows_x64_v3.8.4.zip
-  DJI_DLogM_BatchGrader_Windows_x64_v3.8.4.zip.sha256
+  DJI_DLogM_BatchGrader_Windows_x64_v3.8.5.zip
+  DJI_DLogM_BatchGrader_Windows_x64_v3.8.5.zip.sha256
   ```
 - GitHub 公开仓库仅用于软件下载、用户文档和问题反馈；源码、私钥和授权签发工具不上传。
 
